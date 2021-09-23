@@ -1,5 +1,5 @@
 <template>
-    <div id='lending' class='mb-5'>
+    <div id='lending'>
         <div class="first-block"
          v-bind:style="`background: url(${require('@/assets/img/back.png')}) no-repeat`">
          <div class="anim-elements">
@@ -30,8 +30,8 @@
                         <li class="nav-item fs-18"><a href='#teams' class='h4'>Команды</a></li>
                     </ul>
                     <div class="button-box d-none d-xl-flex">
-                        <button class='btn btn_default fs-18'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
-                        <button class='btn btn_default btn_reverse fs-18'>Регистрация</button>
+                        <button class='btn btn_default fs-18' v-on:click='Log_in()'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
+                        <button class='btn btn_default btn_reverse fs-18' v-on:click='Sign_in()'>Регистрация</button>
                     </div>
                     <div class="burger-box d-flex d-xl-none">
                         <button class="navbar-toggler btn fs-18" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,10 +55,10 @@
                         <a href='#teams' class='h4'>Команды</a>
                     </div>
                     <div class="col-12 nav-item mt-2">
-                        <button class='btn btn_default fs-18'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
+                        <button class='btn btn_default fs-18'  v-on:click='Log_in()'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
                     </div>
                     <div class="col-12 nav-item mt-2">
-                        <button class='btn btn_default btn_reverse fs-18'>Регистрация</button>
+                        <button class='btn btn_default btn_reverse fs-18' v-on:click='Sign_in()'>Регистрация</button>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                 Учитесь и работайте вместе с нашим помощником Чимси!
                             </span>
                             <div class="btn-box mt-4">
-                                <button class='btn btn_default fs-18'>Начнем!&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
+                                <button class='btn btn_default fs-18' v-on:click='Log_in()'>Начнем!&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
                             </div>
                         </div>
                     </div>
@@ -164,16 +164,91 @@
                 </div>
             </div>
         </div>
-        <div class="container">
-
+        <div class="container mt-5" id='teams'>
+            <div class="intro-box text-center">
+                    <span class='headline h1'>Команды</span>
+                    <span class='fs-16 mt-2'>Узнать чем занят ваш коллега? Связаться с ним? Увидеть его навыки? Все это доступно с UFOffice!</span>
+            </div>
+            <div class="row row-flex row-flex-wrap text-center teams-row">
+                <div class="col-12 col-md-6 col-xl-4 mt-5 order-2 order-xl-1">
+                    <div class="card team-card">
+                        <div class="content mt-4 mb-4">
+                            <div class="round-icon-block">
+                                <img v-bind:src="require(`@/assets/img/team_icon_1.png`)" class='img-fluid'>
+                            </div>
+                            <div class="name-block">
+                                <span class='headline h5 mt-2'>Полковник Васин</span>
+                                <div class="round-icon-block">
+                                    <img  v-bind:src="require(`@/assets/img/Chat_icon.png`)" class='img-fluid'>
+                                </div>   
+                            </div>
+                            <div class="task">Прибыл на фронт</div>
+                            <div class="time">35:21:11</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-xl-4 mt-5 order-1 order-xl-2">
+                    <div class="card active team-card">
+                        <div class="content mt-4 mb-4">
+                            <div class="round-icon-block">
+                                <img v-bind:src="require(`@/assets/img/team_icon_2.png`)" class='img-fluid'>
+                            </div>
+                            <div class="name-block">
+                                <span class='headline h5 mt-2'>Чимси инопланетный</span>
+                                <div class="round-icon-block">
+                                    <img v-bind:src="require(`@/assets/img/Chat_icon.png`)" class='img-fluid'>
+                                </div>   
+                            </div>
+                            <div class="task">Оптимизирует код</div>
+                            <div class="time">24:36:13</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-xl-4 mt-5 order-3">
+                    <div class="card team-card">
+                        <div class="content mt-4 mb-4">
+                            <div class="round-icon-block">
+                                 <img v-bind:src="require(`@/assets/img/team_icon_3.png`)" class='img-fluid'>
+                            </div>
+                            <div class="name-block">
+                                <span class='headline h5 mt-2'>Альфредо Гарсиа</span>
+                                <div class="round-icon-block">
+                                    <img  v-bind:src="require(`@/assets/img/Chat_icon.png`)" class='img-fluid'>
+                                </div>   
+                            </div>
+                            <div class="task">Уносит голову</div>
+                            <div class="time">43:54:52</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <Footer/>
     </div>
 </template>
 
 <script>
+import Footer from "@/components/additional_modules/Footer.vue"
 export default {
     name:'lending',
-    data(){
+    components:{
+        Footer
+    },
+    methods:{
+        Sign_in(){
+           if(localStorage.login&&localStorage.token){
+                this.$router.push('/office');
+            }else{
+                this.$router.push("/sign_in");
+            }
+        },
+        Log_in(){
+           if(localStorage.login&&localStorage.token){
+                this.$router.push('/office');
+            }else{
+                this.$router.push("/login");
+            }
+        }
     }
 }
 </script>
@@ -185,7 +260,7 @@ export default {
         background-position: bottom center;
         width: 100%;
     }
-    .navigation{
+    .navigation {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -198,9 +273,6 @@ export default {
         flex-direction: row;
         justify-content: center;
         align-items: baseline;
-    }
-    .brand-div img{
-        height: calc(1.3rem + 1.0vw);
     }
     .nav-block{
         display: flex;
@@ -256,9 +328,6 @@ export default {
         border-radius: 30px;
         justify-content: space-around;
         align-items: center;
-    }
-    .button-img{
-        height: 25px;
     }
     .navbar-toggler .button-img{
         height: 45px;
@@ -323,7 +392,24 @@ export default {
     .round-icon-block img{
         height: 40px;
     }
-    .ability-row .card .content{
+    .name-block{
+        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .name-block .round-icon-block{
+        height: 30px;
+        width: 30px;
+        background-color: #F8F7F9 !important;
+        border: none !important;
+    }
+    .name-block .round-icon-block img{
+        height: 20px;
+        width: 20px;
+    }
+    .content{
         width: 100%;
         height: 100%;
         display: flex;
@@ -337,7 +423,45 @@ export default {
         border-radius: 0 10% 10% 0;
         background-color: #FFE1EA;
     }
-    
+    .team-card{
+        width: 450px;
+        max-width: 100%;
+        border-radius: 5px;
+    }
+    .teams-row .col-12:nth-child(1) .team-card{
+        border: 1px solid #6E44FF;
+        background-color: #6d44ffbe;
+    }
+    .teams-row .col-12:nth-child(2) .team-card{
+        border: 1px solid #33EBC9;
+        background-color: #33EBC9be;
+    }
+    .teams-row .col-12:nth-child(3) .team-card{
+        border: 1px solid #EE562F;
+        background-color: #EE562Fbe;
+    }
+    .teams-row .col-12:nth-child(1) .round-icon-block{
+        border: 1px solid #6E44FF;
+        background-color: #6d44ffbe;
+    }
+    .teams-row .col-12:nth-child(2) .round-icon-block{
+        border: 1px solid #33EBC9;
+        background-color: #33EBC9be;
+    }
+    .teams-row .col-12:nth-child(3) .round-icon-block{
+        border: 1px solid #EE562F;
+        background-color: #EE562Fbe;
+    }
+    .task{
+        width: 80%;
+        height: 30px;
+        background-color: #F8F7F9;
+        border: 1px solid transparent;
+        border-radius: 5px;
+    }
+    .carousel-item img{
+        border-radius: 15px;
+    }
 /*========== Animated Elements ==========*/
     .anim-elements {
         position: absolute;

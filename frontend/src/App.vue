@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <transition name="fade" mode="out-in">
-        <router-view/>
+        <router-view></router-view>
     </transition>
   </div>
 </template>
@@ -108,4 +108,7 @@ button::-moz-focus-inner {
 .bg-red{
   background-color: #EE562F;
 }
+.button-img{
+        height: 25px;
+    }
 </style>

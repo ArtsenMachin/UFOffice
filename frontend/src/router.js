@@ -9,17 +9,31 @@ export default new Router({
     routes:[
       {
         path:'/',
-        component: Lending
+        component: Lending,
+        
       },
       {
-        path:'/office/:id',
-        component: ()=> import('@/views/Office'),
-        children: [
+        path:"/sign_in",
+        component: ()=> import('@/components/additional_modules/Signin')
+      },
+      {
+        path:"/login",
+        component: ()=> import('@/components/additional_modules/Login') 
+      },     
+      {
+        name:'officeMenu',
+        path:'/office_menu',
+        component: ()=> import('@/views/Office_menu'),
+        /*children: [
           { 
             path: '',  
             component: ()=> import('@/components/office/Team') 
           }
-        ]
+        ]*/
+      },
+      {
+        path: "*",
+        component: ()=> import('@/views/Not_found'),
       }
     ]
   })
