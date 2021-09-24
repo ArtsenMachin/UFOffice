@@ -32,6 +32,10 @@ export default new Router({
         ]*/
       },
       {
+        path:'/office/:id',
+        component: ()=> import('@/views/Office'),
+      },
+      {
         path: "*",
         component: ()=> import('@/views/Not_found'),
       }

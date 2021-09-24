@@ -1,18 +1,21 @@
 <template>
-    <div id='office'>
-        <div class="container">
+    <div id='office_menu'>
+        <TopMenuOffice
+        v-bind:orgname="orgname"/>
+       <!-- <div class="container">
             <div class="burger-menu mt-5">
                 <span class='headline h1'>Organization.name</span>
                 <div class="burger-box">
-                    <button class="btn fs-18">
+                    <button class="btn fs-18" v-on:click="goBack">
                         <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='button-img'>
                     </button>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-md-6 col-xl-9 mt-xl-4 mb-xl-4 mt-2 mb-2">
+                   <router-link :to="({path: `/office/${userId}` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -24,8 +27,10 @@
                             </div>
                         </div>
                     </div>
+                   </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-3 mt-xl-4 mb-xl-4 mt-2 mb-2">
+                    <router-link :to="({path: `/office/${userId}` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -33,12 +38,14 @@
                                 <span class='headline h1'>Профиль</span>
                             </div>
                             <div class="link-image">
-                                <img v-bind:src="require(`@/assets/img/Profile_icon.svg`)" class='img-fluid'>
+                                <img v-bind:src="require(`@/assets/img/profile_icon.png`)" class='img-fluid'>
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-5 mt-xl-4 mb-xl-4 mt-2 mb-2">
+                    <router-link :to="({path: `/office/${userId}` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -50,8 +57,10 @@
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-4 mt-xl-4 mb-xl-4 mt-2 mb-2">
+                    <router-link :to="({path: `/office/${userId}` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -59,14 +68,16 @@
                                 <span class='headline h1'>Чат</span>
                             </div>
                             <div class="link-image">
-                                <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='img-fluid'>
+                                <img v-bind:src="require(`@/assets/img/chat.svg`)" class='img-fluid'>
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
                 <div class="col-12 col-xl-3 mt-xl-4 mb-xl-4 mt-2 mb-2">
                     <div class="row lowcard">
                         <div class="col-12 col-md-6 col-xl-12 mb-2 mb-xl-0">
+                            <router-link :to="({path: `/office/${userId}` })">
                             <div class="card">
                                 <div class="back-block"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -74,12 +85,14 @@
                                         <span class='headline h1'>Лидеры</span>
                                     </div>
                                     <div class="link-image">
-                                        <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='img-fluid'>
+                                        <img v-bind:src="require(`@/assets/img/liderboard.svg`)" class='img-fluid'>
                                     </div>
                                 </div>
                             </div>
+                            </router-link>
                         </div>
                         <div class="col-12 mt-xl-2 mt-2 mt-md-0 col-md-6 col-xl-12">
+                            <router-link :to="({path: `/office/${userId}` })">
                             <div class="card">
                                 <div class="back-block"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -91,6 +104,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </router-link>
                         </div>
                     </div>
                 </div>
@@ -98,6 +112,31 @@
         </div>
     </div>
 </template>
+
+<script>
+import TopMenuOffice from "@/components/office/TopMenuOffice.vue"
+export default {
+    components: {TopMenuOffice},
+    data(){
+        return{
+            userId:'1',
+            orgname:'Название организации'
+        }
+    },
+    mounted(){
+        this.CheckIn();
+    },
+    methods:{
+        CheckIn(){
+            console.log('ok');
+        },
+        goBack() {
+            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/');
+        }
+    }    
+}
+
+</script>
 
 <style scoped>
     #office{
