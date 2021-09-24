@@ -36,14 +36,14 @@
                               <img v-bind:src="image"/>
                         </div>
                         <div class="button-role-block">
-                            <button class='btn' v-on:click="BackRole()"><span class='headline h5'>&#8592;</span></button>
+                            <button class='btn' v-on:click="BackRole"><span class='headline h5'>&#8592;</span></button>
                             <span class='headline h2'>{{userInfo.role}}</span>
-                            <button class='btn' v-on:click="NextRole()"><span class='headline h5'>&#8594;</span></button>
+                            <button class='btn' v-on:click="NextRole"><span class='headline h5'>&#8594;</span></button>
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form class='row' @submit.prevent="onSignin()">
+                    <form class='row' @submit.prevent="onSignin">
                         <div class='col-12'>
                             <label for="validationDefault3" class="form-label mt-3">Введите ФИО</label>
                             <div class="input-group">

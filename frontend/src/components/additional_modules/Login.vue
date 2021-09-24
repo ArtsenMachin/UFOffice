@@ -12,7 +12,7 @@
                         </router-link>
                     </div>
                     <div class="button-box">
-                         <router-link to='/sign_in'><button class='btn btn_default btn_reverse fs-18' v-on:click='Sign_in()'>Регистрация</button></router-link>
+                         <router-link to='/sign_in'><button class='btn btn_default btn_reverse fs-18'>Регистрация</button></router-link>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <form class='row' @submit.prevent="onSignin()">
+                    <form class='row' @submit.prevent="onSignin">
                         <div class='col-12'>
                             <label for="validationDefault1" class="form-label mt-3">Введите логин</label>
                             <div class="input-group">

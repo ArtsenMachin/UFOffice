@@ -19,7 +19,7 @@
                     <div class="brand-block">
                         <router-link class="logo" to='/'>
                             <div class="brand-div">
-                                    <span class='h2'>&nbsp;UF<span class='color-green'>O</span>ffice</span>
+                                    <span class='h2'>UF<span class='color-green'>O</span>ffice</span>
                             </div>
                         </router-link>
                     </div>
@@ -55,10 +55,10 @@
                         <a href='#teams' class='h4'>Команды</a>
                     </div>
                     <div class="col-12 nav-item mt-2">
-                        <button class='btn btn_default fs-18'  v-on:click='Log_in()'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
+                        <button class='btn btn_default fs-18'  v-on:click='Log_in'>Вход&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
                     </div>
                     <div class="col-12 nav-item mt-2">
-                        <button class='btn btn_default btn_reverse fs-18' v-on:click='Sign_in()'>Регистрация</button>
+                        <button class='btn btn_default btn_reverse fs-18' v-on:click='Sign_in'>Регистрация</button>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                                 Учитесь и работайте вместе с нашим помощником Чимси!
                             </span>
                             <div class="btn-box mt-4">
-                                <button class='btn btn_default fs-18' v-on:click='Log_in()'>Начнем!&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
+                                <button class='btn btn_default fs-18' v-on:click='Log_in'>Начнем!&nbsp;<img v-bind:src="require(`@/assets/img/rocket.svg`)" class='button-img'></button>
                             </div>
                         </div>
                     </div>
