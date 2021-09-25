@@ -28,28 +28,44 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12"
+                            v-if="role=='teamlead'">
+                                <div class="card task-card mt-2"
+                                v-on:click="openNewTaskWin(worker.id)">
+                                    <div class="headline h1 plus"><i class="fa fa-plus-square-o" aria-hidden="true"></i></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-         <TaskModal
+        <TaskModal
         v-if="taskmodal"
         v-bind:task="bigTask"
-        @closeModal="closeModal"/>
+        @closeModal="closeModal"
+        @CloseSuccess="CloseSuccess"/>
+        <CreateTask
+        v-if="createTaskModal"
+        v-bind:task="NewTaskID"
+        @closeModal="closeNewModal"
+        @CloseSuccess="CloseSuccess"/>
     </div>
 </template>
 <script>
 import TaskModal from "@/components/office/TaskModal.vue"
+import CreateTask from "@/components/office/CreateTask.vue"
 import { mapGetters, mapActions } from "vuex";
 export default {
   computed: mapGetters(["TaskWorker"]),
   components:{
-      TaskModal
+      TaskModal, CreateTask
   },
   data(){
       return{
           taskmodal:false,
+          createTaskModal:false,
+          NewTaskID:'',
           bigTask:{
                 name:'',
                 time:'',
@@ -59,7 +75,8 @@ export default {
                 task_id:'',
                 worker_id:'',
                 user_id:''
-          }
+          },
+          role: 'teamlead'
       }
   },
   async mounted(){
@@ -69,11 +86,11 @@ export default {
   methods:{
       ...mapActions(["getTask"]),
       MenuLink(){
-            document.getElementById("link-card-1").classList.remove('active');
-            document.getElementById("link-card-2").classList.remove('active');
-            document.getElementById("link-card-3").classList.add('active');
-            let width=this.TaskWorker.length*340;
-            document.getElementById('overflow').style.width=width+"px";
+        document.getElementById("link-card-1").classList.remove('active');
+        document.getElementById("link-card-2").classList.remove('active');
+        document.getElementById("link-card-3").classList.add('active');
+        let width=this.TaskWorker.length*340;
+        document.getElementById('overflow').style.width=width+"px";
       },
       openTask(worker_id, task_id){
           let worker = this.TaskWorker.find((item) => item.id === worker_id);
@@ -81,8 +98,18 @@ export default {
           this.bigTask=task;
           this.taskmodal=true;
       },
+      openNewTaskWin(el){
+          this.NewTaskID=el;
+           this.createTaskModal=true;
+      },
       closeModal(){
           this.taskmodal=false;
+      },
+      closeNewModal(){
+          this.createTaskModal=false;
+      },
+      CloseSuccess(){
+          this.getTask();
       }
   }
 }
@@ -152,5 +179,14 @@ export default {
     }
     .stillactive{
         background-color: #EE562F;
+    }
+    .plus{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 0 !important;
     }
 </style>

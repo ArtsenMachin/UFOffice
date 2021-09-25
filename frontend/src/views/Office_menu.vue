@@ -5,7 +5,7 @@
         <div class="container mt-5">
             <div class="row">
                 <div class="col-12 col-md-6 col-xl-9 mt-xl-4 mb-xl-4 mt-2 mb-2">
-                   <router-link :to="({path: `/office/${userId}/gameoffice`})">
+                   <router-link :to="({path: `/office/gameoffice`})">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -20,7 +20,7 @@
                    </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-3 mt-xl-4 mb-xl-4 mt-2 mb-2">
-                    <router-link :to="({path: `/office/${userId}` })">
+                    <router-link :to="({path: `/office` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -35,7 +35,7 @@
                     </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-5 mt-xl-4 mb-xl-4 mt-2 mb-2">
-                    <router-link :to="({path: `/office/${userId}` })">
+                    <router-link :to="({path: `/ability` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -50,7 +50,7 @@
                     </router-link>
                 </div>
                 <div class="col-12 col-md-6 col-xl-4 mt-xl-4 mb-xl-4 mt-2 mb-2">
-                    <router-link :to="({path: `/office/${userId}` })">
+                    <router-link :to="({path: `/office` })">
                     <div class="card">
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -67,7 +67,7 @@
                 <div class="col-12 col-xl-3 mt-xl-4 mb-xl-4 mt-2 mb-2">
                     <div class="row lowcard">
                         <div class="col-12 col-md-6 col-xl-12 mb-2 mb-xl-0">
-                            <router-link :to="({path: `/liderboard/${userId}` })">
+                            <router-link :to="({path: `/liderboard` })">
                             <div class="card">
                                 <div class="back-block"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -82,7 +82,7 @@
                             </router-link>
                         </div>
                         <div class="col-12 mt-xl-2 mt-2 mt-md-0 col-md-6 col-xl-12">
-                            <router-link :to="({path: `/office/${userId}/task` })">
+                            <router-link :to="({path: `/office/task` })">
                             <div class="card">
                                 <div class="back-block"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
@@ -109,9 +109,7 @@ export default {
     components: {TopMenuOffice},
     data(){
         return{
-            userId:'1',
             orgname:{
-               name:'Название организации',
                type:'menu'
             }
         }

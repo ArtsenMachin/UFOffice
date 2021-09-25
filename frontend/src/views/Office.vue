@@ -8,7 +8,7 @@
                     <div class="card">
                         <div class="row g-0">
                             <div class="col-12 col-md-4">
-                            <router-link :to="({path: `/office/${userId}/gameoffice` })">
+                            <router-link :to="({path: `/office/gameoffice` })">
                                 <div class="link-card" id="link-card-1"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header">
@@ -18,7 +18,7 @@
                             </router-link>
                             </div>
                             <div class="col-12 col-md-4">
-                            <router-link :to="({path: `/office/${userId}/team` })">
+                            <router-link :to="({path: `/office/team` })">
                                 <div class="link-card text-center" id="link-card-2"
                                  v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header text-center">
@@ -28,7 +28,7 @@
                             </router-link>
                             </div>
                             <div class="col-12 col-md-4">
-                            <router-link :to="({path: `/office/${userId}/task` })">
+                            <router-link :to="({path: `/office/task` })">
                                <div class="link-card"  id="link-card-3"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header">
@@ -59,8 +59,7 @@ export default {
           orgname:{
                name:'Название организации',
                type:'notmenu'
-            },   
-          userId:'1'
+            }
       }
   }
 }

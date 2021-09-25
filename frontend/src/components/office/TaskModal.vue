@@ -57,7 +57,11 @@ export default {
         },
         SaveCard(id){
             this.readyCard(id);
+            this.CloseSuccess();
             this.CloseModalWindow();
+        },
+        CloseSuccess(){
+            this.$emit('CloseSuccess');
         },
         ...mapActions(['readyCard']),
     }
