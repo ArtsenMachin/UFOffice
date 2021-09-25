@@ -8,7 +8,7 @@
 
 Настройка директории и установка зависимостей (windows)
 
-```console
+```ps
 $ cd backend
 
 $ python -m venv env
