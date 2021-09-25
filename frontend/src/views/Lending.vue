@@ -237,14 +237,14 @@ export default {
     methods:{
         Sign_in(){
            if(localStorage.login&&localStorage.token){
-                this.$router.push('/office');
+                this.$router.push('/office_menu');
             }else{
                 this.$router.push("/sign_in");
             }
         },
         Log_in(){
            if(localStorage.login&&localStorage.token){
-                this.$router.push('/office');
+                this.$router.push('/office_menu');
             }else{
                 this.$router.push("/login");
             }

@@ -14,8 +14,7 @@ export default {
               }); 
         },
         async getTeam(ctx){
-            // var user=localStorage.token
-            var user=3;
+            var user=localStorage.id;
             const path = 'http://26.237.70.37:5000/team?user_id='+user;
             var data;
             axios.get(path)
@@ -28,13 +27,10 @@ export default {
               }); 
         },
         async getLiderboard(ctx){
-            const path = 'http://26.237.70.37:5000/liderboard';
+            var user=localStorage.id;
+            const path = 'http://26.237.70.37:5000/leaderboard?user_id='+user;
             var data;
-            var userInfo={
-                login:localStorage.login,
-                token:localStorage.token
-            }
-            axios.get(path, userInfo)
+            axios.get(path)
               .then((res) => {
                 data = res.data;
                 ctx.commit('updateTeam', data)
@@ -44,13 +40,10 @@ export default {
               }); 
         },
         async getUserRating(ctx){
-            const path = 'http://26.237.70.37:5000/userrating';
+            var user=localStorage.id;
+            const path = 'http://26.237.70.37:5000/userrating?user_id='+user;
             var data;
-            var userInfo={
-                login:localStorage.login,
-                token:localStorage.token
-            }
-            axios.get(path, userInfo)
+            axios.get(path)
               .then((res) => {
                 data = res.data;
                 ctx.commit('updateUserRating', data)
@@ -60,13 +53,10 @@ export default {
               }); 
         },
         async getOrganization(ctx){
-            const path = 'http://26.237.70.37:5000/organization';
+            var user=localStorage.id;
+            const path = 'http://26.237.70.37:5000/organization?user_id='+user;
             var data;
-            var userInfo={
-                login:localStorage.login,
-                token:localStorage.token
-            }
-            axios.get(path, userInfo)
+            axios.get(path)
               .then((res) => {
                 data = res.data;
                 ctx.commit('updateOrg', data)
@@ -194,154 +184,11 @@ export default {
     },
 
     state: {
-        worker:[
-            {
-                name:'Микульский Никита',
-                proffesion:'дизайнер',
-                id:'0',
-                tasks:[
-                    {
-                        name:'нарисовать картинки',
-                        time:'25.09.2021',
-                        level:'100',
-                        description:'нарисовать картинки на лендинг',
-                        status:'inactive',
-                        id:'0',
-                        user_id:'0'
-                    },
-                    {
-                        name:'сделать canvas',
-                        time:'26.09.2021',
-                        level:'200',
-                        description:'нарисовать офис на канвасе',
-                        status:'active',
-                        id:'1',
-                        user_id:'0'
-                    }
-                ]
-            },
-            {
-                name:'Цветков Роман',
-                proffesion:'разработчик',
-                id:'1',
-                tasks:[
-                    {
-                        name:'нарисовать картинки',
-                        time:'25.09.2021',
-                        level:'100',
-                        description:'нарисовать картинки на меню и команду',
-                        status:'active',
-                        id:'0',
-                        user_id:'1'
-                    },
-                    {
-                        name:'шаблонизировать запросы в json',
-                        time:'26.09.2021',
-                        level:'200',
-                        description:'шаблонизировать запросы в json на flask',
-                        status:'active',
-                        id:'1',
-                        user_id:'1'
-                    }
-                ]
-            },
-            {
-                name:'Четвергтаков Иван',
-                proffesion:'разработчик',
-                id:'2',
-                tasks:[
-                    {
-                        name:'создать БД',
-                        time:'25.09.2021',
-                        level:'300',
-                        description:'создать базу данных на PostgreSQL',
-                        status:'inactive',
-                        id:'0',
-                        user_id:'2'
-                    },
-                    {
-                        name:'написать запросы',
-                        time:'26.09.2021',
-                        level:'500',
-                        description:'Написать запросы на все функции',
-                        status:'active',
-                        id:'1',
-                        user_id:'2'
-                    },
-                    {
-                        name:'поднять сервер',
-                        time:'26.09.2021',
-                        level:'500',
-                        description:'Поднять сервер и настроить CORS',
-                        status:'active',
-                        id:'2',
-                        user_id:'2'
-                    },
-                    {
-                        name:'Выспаться',
-                        time:'26.09.2021',
-                        level:'500',
-                        description:'Хорошенько поспать',
-                        status:'active',
-                        id:'3',
-                        user_id:'2'
-                    }
-                ]
-            },
-            {
-                name:'Столбов Михаил',
-                proffesion:'мигрант',
-                id:'3',
-                tasks:[
-                    {
-                        name:'получить паспорт',
-                        time:'10.09.2017',
-                        level:'10',
-                        description:'получить Российское гражданство',
-                        status:'stillactive',
-                        id:'0',
-                        user_id:'3'
-                    },
-                    {
-                        name:'нарисовать картинок',
-                        time:'26.09.2021',
-                        level:'500',
-                        description:'Картинки!',
-                        status:'active',
-                        id:'1',
-                        user_id:'3'
-                    }
-                ]
-            }
-        ],
+        worker:'',
         team:'',
-        lider:[
-            {
-                name:'ФИО',
-                rating:'500',
-                position:'1'
-            },
-            {
-                name:'ФИО',
-                rating:'500',
-                position:'2'
-            },
-            {
-                name:'ФИО',
-                rating:'500',
-                position:'3'
-            },
-            {
-                name:'ФИО',
-                rating:'500',
-                position:'4'
-            }
-        ],
+        
         org_name:'МИКУЛЬСКАЯ',
-        user_rating:{
-            rating: '300',
-            position: '2'
-        },
+
         new_worker:[
             {
             name:'Микульский Никита',
@@ -379,8 +226,8 @@ export default {
                         img:require('@/assets/img/Office_icon_re.png'),
                         tooltip:'елда',
                     }
-                    ]
-                }
+                ]
+            }
         ]
     }
 }

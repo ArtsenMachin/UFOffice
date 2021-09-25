@@ -4,7 +4,7 @@ import json
 
 
 async def get_leaderboard(user_id):
-        
+
     data = await DB.conn.fetch(
         f'''
             with org as (

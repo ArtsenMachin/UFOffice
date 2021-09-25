@@ -44,15 +44,16 @@
         v-if="taskmodal"
         v-bind:task="bigTask"
         @closeModal="closeModal"
-        @CloseSuccess="CloseSuccess"/>
+        @updateStatusTask="updateStatusTask"/>
         <CreateTask
         v-if="createTaskModal"
         v-bind:task="NewTaskID"
         @closeModal="closeNewModal"
-        @CloseSuccess="CloseSuccess"/>
+        @updateParent="updateParent"/>
     </div>
 </template>
 <script>
+import axios from "axios"
 import TaskModal from "@/components/office/TaskModal.vue"
 import CreateTask from "@/components/office/CreateTask.vue"
 import { mapGetters, mapActions } from "vuex";
@@ -79,18 +80,38 @@ export default {
           role: 'teamlead'
       }
   },
-  async mounted(){
-      this.MenuLink();
+  mounted(){
       this.getTask();
+      this.MenuLink();
   },
   methods:{
       ...mapActions(["getTask"]),
+      updateParent(task){
+        const path = 'http://26.237.70.37:5000/add_new_task';
+        axios.post(path, task.new_task_data)
+            .then((res) => {
+                console.log(res);
+                this.getTask();
+            })
+            .catch((error) => {
+            console.error(error);
+            }); 
+      },
+      updateStatusTask(task){
+        const path = 'http://26.237.70.37:5000/update_task';
+        axios.post(path, task.card_id)
+            .then((res) => {
+                console.log(res);
+                this.getTask();
+            })
+            .catch((error) => {
+            console.error(error);
+            }); 
+      },
       MenuLink(){
         document.getElementById("link-card-1").classList.remove('active');
         document.getElementById("link-card-2").classList.remove('active');
         document.getElementById("link-card-3").classList.add('active');
-        let width=this.TaskWorker.length*340;
-        document.getElementById('overflow').style.width=width+"px";
       },
       openTask(worker_id, task_id){
           let worker = this.TaskWorker.find((item) => item.id === worker_id);
@@ -130,6 +151,7 @@ export default {
         display: flex;
         flex-direction: row;
         justify-content: space-around;
+        width: 1400px !important;
     }
     .card{
         padding: 15px;

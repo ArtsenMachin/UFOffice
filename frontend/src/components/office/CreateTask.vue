@@ -45,7 +45,6 @@
     </div>
 </template>
 <script>
-import { mapActions } from "vuex";
 export default {
     props:['task'],
     data(){
@@ -54,7 +53,8 @@ export default {
                 name:'',
                 rating:'',
                 data:'',
-                desc:''
+                desc:'',
+                id:''
             }
         }
     },
@@ -63,14 +63,12 @@ export default {
            this.$emit('closeModal');
         },
         CreateNewTask(){
-            this.newCard(this.task);
-            this.CloseSuccess();
-        },
-        CloseSuccess(){
-            this.$emit('CloseSuccess');
+            this.task_info.id=this.task;
+            this.$emit('updateParent', {
+            new_task_data: this.task_info,
+            });
             this.CloseModalWindow();
-        },
-        ...mapActions(['newCard']),
+        }
     }
 }
 </script>

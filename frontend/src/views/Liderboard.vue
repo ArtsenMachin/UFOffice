@@ -8,11 +8,11 @@
                 <div class="row">
                     <div class="col-6 text-center">
                         <div class="headline h2">Ваш рейтинг</div>
-                        <div class="text display-5 logo">{{userRating.rating}}</div>
+                        <div class="text display-5 logo">{{user_rating.rating}}</div>
                     </div>
                     <div class="col-6 text-center">
                         <div class="headline h2">Ваш ранг</div>
-                        <div class="text display-5 logo">{{userRating.position}}</div>
+                        <div class="text display-5 logo">{{user_rating.position}}</div>
                     </div>
                 </div>
             </div>
@@ -20,11 +20,19 @@
                 <img v-bind:src="require(`@/assets/img/liderboard.svg`)">
             </div>
            <div class="card lider-card"
-            v-for="worker in Liderboard" :key="worker.id">
-                <span class='fs-24'
-                v-bind:class="'pos'+worker.position">{{worker.position}}</span>
-                <span class='fs-24'>{{worker.name}}</span>
-                <span class='fs-24'>{{worker.rating}}</span>
+            v-for="worker in lider" :key="worker.id">
+                <div class="row">
+                    <div class="col-4 text-center">
+                        <span class='fs-24'
+                            v-bind:class="'pos'+worker.position">{{worker.position}}</span>
+                    </div>
+                    <div class="col-4 text-center">
+                        <span class='fs-24'>{{worker.name}}</span>
+                    </div>
+                    <div class="col-4 text-center">
+                        <span class='fs-24'>{{worker.rating}}</span>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="container-fluid footer text-center mt-5">
@@ -34,25 +42,44 @@
 </template>
 
 <script>
-import TopMenuOffice from "@/components/office/TopMenuOffice.vue";
-import { mapGetters, mapActions } from "vuex";
+import TopMenuOffice from "@/components/office/TopMenuOffice.vue"
+import axios from "axios"
 export default {
   components: {TopMenuOffice},
-  computed: mapGetters(["Liderboard", "userRating"]),
   data(){
       return{
           orgname:{
-               type:'notmenu'
-            }
-      }
+               type:'notmenu',
+           },
+           lider:'',
+            user_rating:'',
+        }
   },
-  async mounted(){
+  mounted(){
       this.getLiderboard();
-      this.getUserRating();
+     
   },
   methods: {
-      ...mapActions(['getLiderboard']),
-      ...mapActions(['getUserRating'])
+      getLiderboard(){
+          var user=localStorage.id;
+            const path = 'http://26.237.70.37:5000/leaderboard?user_id='+user;
+            axios.get(path)
+              .then((res) => {
+                this.lider = res.data;
+                var user=localStorage.id;
+                    const path = 'http://26.237.70.37:5000/userrating?user_id='+user;
+                    axios.get(path)
+                    .then((res) => {
+                        this.user_rating = res.data;                        
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                    }); 
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
+      }
   }
 }
 </script>
@@ -73,10 +100,6 @@ export default {
     .lider-card{
         border-radius: 5px;
         background-color: #F8F7F9;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
         margin-top: 2.5px;
     }
     .img-div{
