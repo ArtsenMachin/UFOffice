@@ -1,8 +1,6 @@
 from flask import request
 from json import loads
 from resources import DB
-
-
 from resources import app
 from resources.queries import registration
 
