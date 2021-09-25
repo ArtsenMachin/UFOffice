@@ -58,6 +58,7 @@ export default {
                 status:'',
                 task_id:'',
                 worker_id:'',
+                user_id:''
           }
       }
   },

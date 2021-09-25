@@ -1,6 +1,6 @@
 <template>
     <div id="team">
-        <div class="container mt-5">
+        <div class="container mt-5" v-if="role!='teamlead'">
             <div class="desc-block text-center">
                 <div class="name headline h3">{{TeamWorker[i].name}}</div>
                 <div class="proffesion">{{TeamWorker[i].proffesion}}</div>
@@ -82,6 +82,89 @@
                 </div>
             </div>
         </div>
+        <div class="container teamlead-container mt-5" v-else>
+            <div class="row g-0">
+                <div class="col-12 col-sm-6 col-md-4 col-xl-3 g-0"
+                v-if="TeamWorker">
+                    <div class="card team-card team"
+                        v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`"
+                        v-on:click="ShowComand()">
+                        <span class='h2'>{{TeamWorker[0].teamName}}</span>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 col-xl-3"
+                v-if="!TeamWorker">
+                    <div class="card team-card"
+                        v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
+                    </div>
+                </div>
+            </div>
+            <div class="row" v-if="ShowComand_temp">
+                <div class="col-12 col-sm-6 col-md-5 offset-md-1 col-xl-4 offset-xl-0"
+                v-for="worker in TeamWorker" :key="worker.id">
+                    <div class="card worker-card mt-2">
+                        <div class="btn-worker-class">
+                            <div class="actions">
+                                <div class='text-rigth' v-on:click='OpenDropdown(worker.id)'><i class="fa fa-pencil" aria-hidden="true"></i></div>
+                                <div class="card mt-2 dropdown text-center" v-bind:id="`worker`+worker.id">
+                                    Уволить
+                                </div>
+                            </div>
+                        </div>
+                        <div class="name-worker-card">
+                            <div class="round-image">
+                                <img v-bind:src="worker.img">
+                            </div>
+                            <div class="desc-block text-center">
+                                <div class="name headline h4">{{TeamWorker[i].name}}</div>
+                                <div class="proffesion">{{TeamWorker[i].proffesion}}</div>
+                            </div>
+                        </div>
+                        <div class="task-block-text text-center">
+                            <div class="name headline h3 mt-2">{{TeamWorker[i].work}}</div>
+                            <div class="proffesion">{{TeamWorker[i].ttd}}</div>
+                        </div>
+                        <div class="ss">
+                            <a v-bind:href="TeamWorker[i].phone">
+                                <div class="round-ss">
+                                    <span class='fs-16'>
+                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </a>
+                            <a v-bind:href="`mailto:`+TeamWorker[i].mail">
+                                <div class="round-ss">
+                                    <span class='fs-16'>
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </a>
+                            <a v-bind:href="TeamWorker[i].tg">
+                                <div class="round-ss">
+                                    <span class='fs-16'>
+                                    <i class="fa fa-telegram" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </a>
+                            <a v-bind:href="TeamWorker[i].vk">
+                                <div class="round-ss">
+                                    <span class='fs-16'>
+                                    <i class="fa fa-vk" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </a>
+                            <a v-bind:href="TeamWorker[i].fb">
+                                <div class="round-ss">
+                                    <span class='fs-16'>
+                                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -91,10 +174,12 @@ export default {
     data(){
         return{
             i:0,
+            role:'teamlead',
+            ShowComand_temp:false
         }
     },
     async mounted(){
-        this.MenuLink();
+        this.MenuLink();   
         this.getTeam();
     },
     methods:{
@@ -105,6 +190,9 @@ export default {
             document.getElementById("link-card-2").classList.add('active');
             let width=this.TeamWorker.length*280;
             document.getElementById('overflow').style.width=width+"px";
+        },
+        ShowComand(){
+            this.ShowComand_temp=true;
         },
         Prev(){
             if(this.i==0){
@@ -122,6 +210,14 @@ export default {
         },
         Switch(id){
             this.i=id;
+        },
+        OpenDropdown(id){
+            if(document.getElementById("worker"+id).style.display=='none'){
+                document.getElementById("worker"+id).style.display='flex'
+            }else{
+                document.getElementById("worker"+id).style.display='none'
+            }
+           
         }
     }
 }
@@ -131,8 +227,8 @@ export default {
         width: 100%;
     }
     .round-skill{
-        width: 70px;
-        height: 70px;
+        width: 70px !important;
+        height: 70px !important;
         border-radius: 50%;
         border: 2px solid #33EBC9;
         display: flex;
@@ -140,7 +236,7 @@ export default {
         align-items: center;
     }
     .round-skill img{
-        height: 50px;
+        height: 50px !important;
     }
     .info-card{
         padding: 15px;
@@ -190,5 +286,100 @@ export default {
         .arrows{
             margin-top: 15px;
         }
+    }
+    .team-card{
+        width:300px;
+        background-color: #12130F !important;
+        padding: 15px;
+        border-radius: 5px;
+        color: #F8F7F9;
+        height: 150px;
+    }
+    .team{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-end;
+    }
+    .team:hover{
+        cursor: pointer;
+        background-color: #6E44FF !important;
+    }
+    .worker-card{
+        width:100%;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-content: space-around;
+        padding: 15px;
+    }
+    .name-worker-card{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .round-image{
+        width: 50px;
+        height: 50px;
+        border: 2px dotted #6E44FF;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .round-image img{
+        width: 30px;
+        margin: 0 auto;
+    }
+    .task-block-text {
+        width: 100%;
+    }
+    .teamlead-container{
+        min-height: 60vh;
+    }
+    .round-ss{
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #6E44FF;
+        color: #F8F7F9;
+        margin: 5px;
+    }
+    .ss{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    .btn-worker-class{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+    .actions{
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    .dropdown{
+        width: 100%;
+        display: none;
+        padding: 2.5px;
+        background-color: #EE562F;
+        color: #F8F7F9;
+    }
+    .text-rigth{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
     }
 </style>

@@ -80,6 +80,21 @@ export default {
               .catch((error) => {
                 console.error(error);
               }); 
+        },
+        async readyCard(ctx, id){
+            const path = 'http://localhost:5000/update_task';
+            var data;
+            var taskInfo={
+                task_id:id,
+            }
+            axios.post(path, taskInfo)
+              .then((res) => {
+                data = res.data;
+                ctx.commit('updateTask', data)
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
         }
 
     },
@@ -131,7 +146,8 @@ export default {
                         level:'100',
                         description:'нарисовать картинки на лендинг',
                         status:'inactive',
-                        id:'0'
+                        id:'0',
+                        user_id:'0'
                     },
                     {
                         name:'сделать canvas',
@@ -139,7 +155,8 @@ export default {
                         level:'200',
                         description:'нарисовать офис на канвасе',
                         status:'active',
-                        id:'1'
+                        id:'1',
+                        user_id:'0'
                     }
                 ]
             },
@@ -154,7 +171,8 @@ export default {
                         level:'100',
                         description:'нарисовать картинки на меню и команду',
                         status:'active',
-                        id:'0'
+                        id:'0',
+                        user_id:'1'
                     },
                     {
                         name:'шаблонизировать запросы в json',
@@ -162,7 +180,8 @@ export default {
                         level:'200',
                         description:'шаблонизировать запросы в json на flask',
                         status:'active',
-                        id:'1'
+                        id:'1',
+                        user_id:'1'
                     }
                 ]
             },
@@ -177,7 +196,8 @@ export default {
                         level:'300',
                         description:'создать базу данных на PostgreSQL',
                         status:'inactive',
-                        id:'0'
+                        id:'0',
+                        user_id:'2'
                     },
                     {
                         name:'написать запросы',
@@ -185,7 +205,8 @@ export default {
                         level:'500',
                         description:'Написать запросы на все функции',
                         status:'active',
-                        id:'1'
+                        id:'1',
+                        user_id:'2'
                     },
                     {
                         name:'поднять сервер',
@@ -193,7 +214,8 @@ export default {
                         level:'500',
                         description:'Поднять сервер и настроить CORS',
                         status:'active',
-                        id:'2'
+                        id:'2',
+                        user_id:'2'
                     },
                     {
                         name:'Выспаться',
@@ -201,7 +223,8 @@ export default {
                         level:'500',
                         description:'Хорошенько поспать',
                         status:'active',
-                        id:'3'
+                        id:'3',
+                        user_id:'2'
                     }
                 ]
             },
@@ -216,7 +239,8 @@ export default {
                         level:'10',
                         description:'получить Российское гражданство',
                         status:'stillactive',
-                        id:'0'
+                        id:'0',
+                        user_id:'3'
                     },
                     {
                         name:'нарисовать картинок',
@@ -224,7 +248,8 @@ export default {
                         level:'500',
                         description:'Картинки!',
                         status:'active',
-                        id:'1'
+                        id:'1',
+                        user_id:'3'
                     }
                 ]
             }
@@ -243,6 +268,8 @@ export default {
                 ttd:'12:36:56',
                 position:0,
                 rating:'200',
+                id: 0,
+                teamName:'Cheemsburger',
                 skills:[
                     {
                         img:require('@/assets/img/Office_icon_re.png'),
@@ -282,6 +309,7 @@ export default {
                 ttd:'12:36:56',
                 position:1,
                 rating:'200',
+                id: 1,
                 skills:[
                     {
                         img:require('@/assets/img/Office_icon_re.png'),
@@ -322,6 +350,7 @@ export default {
                 ttd:'12:36:56',
                 position:2,
                 rating:'200',
+                id: 2,
                 skills:[
                     {
                         img:require('@/assets/img/Office_icon_re.png'),
