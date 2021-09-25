@@ -9,16 +9,19 @@ from resources.queries import registration
 
 @app.post('/registration')
 async def login_user():
-	try:
-		await DB.connect()
-		data = request.data.decode('utf8')
-		output = await registration(
+    try:
+        await DB.connect()
+
+        data = request.data.decode('utf8')
+        output = await registration(
             loads(data)['login'],
             loads(data)['password']
             # ...
         )
-		await DB.close()
-		return output
+        
+        await DB.close()
 
-	except Exception as e:
-		print(e)
+        return output
+
+    except Exception as e:
+        print(e)

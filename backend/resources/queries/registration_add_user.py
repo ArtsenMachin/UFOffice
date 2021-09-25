@@ -1,4 +1,4 @@
-from resources.services import hash_pass, json_serializable
+from resources.services import hash_pass
 from resources import DB
 
 

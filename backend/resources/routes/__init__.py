@@ -1,6 +1,6 @@
 from resources import app
 from resources.routes import (
-    login, skills, tasks, team
+    login, tasks, team, create_task, organization_name, leaderboard
 )
 
 

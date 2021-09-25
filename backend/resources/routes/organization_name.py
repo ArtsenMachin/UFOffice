@@ -1,16 +1,16 @@
 from flask import request
 from resources import DB
+
 from resources import app
-from resources.queries import team_list
+from resources.queries import get_organization_name
 
 
-@app.get('/team')
-async def team():
+@app.get('/organization')
+async def organization():
     try:
         await DB.connect()
-        
-        user_id = request.args['user_id']
-        output = await team_list(user_id)
+
+        output = await get_organization_name(request.args['user_id'])
 
         await DB.close()
 

@@ -69,5 +69,4 @@ async def get_user_tasks(org_id=1):
 
         result.new_features_tuple()
 
-    print(json.dumps(result.data[:-1], indent=2))
     return json.dumps(result.data[:-1], indent=2)

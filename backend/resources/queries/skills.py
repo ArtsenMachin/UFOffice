@@ -1,6 +1,5 @@
 from resources import DB
 from resources.services import json_serializable
-import json
 
 
 async def skills_info(user_id):

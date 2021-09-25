@@ -8,10 +8,13 @@ from resources.queries import get_user_tasks
 async def tasks():
     try:
         await DB.connect()
+
         user_id = request.args['org_id']
-        ret = await get_user_tasks(user_id)
+        output = await get_user_tasks(user_id)
+
         await DB.close()
-        return ret
+        
+        return output
 
     except Exception as e:
         print(e)
