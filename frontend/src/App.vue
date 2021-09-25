@@ -66,6 +66,9 @@ a{
 .color-blue{
   color: #6E44FF;
 }
+.color-white{
+  color: #F8F7F9;
+}
 button:active, button:focus {
   outline: none !important;
   box-shadow: unset !important;
@@ -106,7 +109,8 @@ button::-moz-focus-inner {
   background-color: #33EBC9;
 }
 .bg-red{
-  background-color: #EE562F;
+  background-color: #EE562F !important;
+  border-color: #EE562F !important;
 }
 .button-img{
         height: 25px;

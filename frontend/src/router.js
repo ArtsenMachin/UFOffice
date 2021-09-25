@@ -24,16 +24,32 @@ export default new Router({
         name:'officeMenu',
         path:'/office_menu',
         component: ()=> import('@/views/Office_menu'),
-        /*children: [
-          { 
-            path: '',  
-            component: ()=> import('@/components/office/Team') 
-          }
-        ]*/
       },
       {
-        path:'/office/:id',
+        path:'/office',
         component: ()=> import('@/views/Office'),
+        children:[
+          {
+            path: 'gameoffice',
+            component: ()=> import('@/components/office/GameOffice') 
+          },
+          {
+            path: 'team',
+            component: ()=> import('@/components/office/Team') 
+          },
+          {
+            path: 'task',
+            component: ()=> import('@/components/office/Task') 
+          }
+        ]
+      },
+      {
+        path:'/liderboard',
+        component: ()=> import('@/views/Liderboard') 
+      },
+      {
+        path:'/ability',
+        component: ()=> import('@/views/Ability') 
       },
       {
         path: "*",

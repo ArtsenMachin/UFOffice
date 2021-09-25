@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="img-div">
-                             <img v-bind:src="require(`@/assets/img/Tarelka21.png`)" class='img-fluid'>
+                             <img v-bind:src="require(`@/assets/img/tarelka.png`)" class='img-fluid'>
                         </div>
                     </div>
                 </div>
@@ -99,8 +99,8 @@
                             <div class="round-icon-block bg-blue">
                                 <img v-bind:src="require(`@/assets/img/rocket.svg`)" class='img-fluid'>
                             </div>
-                            <span class='headline h5 mt-2 color-blue'>Зелупа</span>
-                            <span class='fs-16 mt-2'>С нашей залупой все залупа</span>
+                            <span class='headline h5 mt-2 color-blue'>Кооперируйся</span>
+                            <span class='fs-16 mt-2'>Работай вместе со своей командой, будто вы рядом</span>
                         </div>
                     </div>
                 </div>
@@ -110,8 +110,8 @@
                             <div class="round-icon-block bg-green">
                                 <img v-bind:src="require(`@/assets/img/rocket.svg`)" class='img-fluid'>
                             </div>
-                            <span class='headline h5 mt-2 color-green'>Зелупа</span>
-                            <span class='fs-16 mt-2'>С нашей залупой все залупа</span>
+                            <span class='headline h5 mt-2 color-green'>Работай</span>
+                            <span class='fs-16 mt-2'>Выполняй задания, зарабатывай достижения, стань лучшим в своей коллективе</span>
                         </div>
                     </div>
                 </div>
@@ -121,8 +121,8 @@
                             <div class="round-icon-block bg-red">
                                 <img v-bind:src="require(`@/assets/img/rocket.svg`)" class='img-fluid'>
                             </div>
-                            <span class='headline h5 mt-2 color-red'>Зелупа</span>
-                            <span class='fs-16 mt-2'>С нашей залупой все залупа</span>
+                            <span class='headline h5 mt-2 color-red'>Управляй</span>
+                            <span class='fs-16 mt-2'>Объедини свою команду, ставь цели, назначай задачи, будь хорошим лидером</span>
                         </div>
                     </div>
                 </div>
@@ -146,7 +146,7 @@
                             <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="5000">
-                            <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">
+                            <img v-bind:src="require(`@/assets/img/office_screen_1.png`)" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="5000"> 
                             <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">

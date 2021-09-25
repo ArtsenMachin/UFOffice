@@ -8,48 +8,58 @@
                     <div class="card">
                         <div class="row g-0">
                             <div class="col-12 col-md-4">
-                                <div class="link-card active"
+                            <router-link :to="({path: `/office/gameoffice` })">
+                                <div class="link-card" id="link-card-1"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header">
                                         <span class='headline h1'>Офис</span>
                                     </div>
                                 </div>
+                            </router-link>
                             </div>
                             <div class="col-12 col-md-4">
-                                <div class="link-card text-center"
+                            <router-link :to="({path: `/office/team` })">
+                                <div class="link-card text-center" id="link-card-2"
                                  v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header text-center">
                                         <span class='headline h1'>Команда</span>
                                     </div>
                                 </div>
+                            </router-link>
                             </div>
                             <div class="col-12 col-md-4">
-                               <div class="link-card"
+                            <router-link :to="({path: `/office/task` })">
+                               <div class="link-card"  id="link-card-3"
                                 v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                                     <div class="link-header">
                                         <span class='headline h1'>Задачи</span>
                                     </div>
                                 </div>
+                            </router-link>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <GameOffice/>
+        <transition name="fade" mode="out-in">
+            <router-view></router-view>
+        </transition>
         <Footer/>
     </div>
 </template>
 
 <script>
 import TopMenuOffice from "@/components/office/TopMenuOffice.vue"
-import GameOffice from "@/components/office/GameOffice.vue"
 import Footer from '../components/additional_modules/Footer.vue'
 export default {
-  components: { Footer, TopMenuOffice, GameOffice},
+  components: { Footer, TopMenuOffice},
   data(){
       return{
-          orgname:'Название организации'
+          orgname:{
+               name:'Название организации',
+               type:'notmenu'
+            }
       }
   }
 }

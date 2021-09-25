@@ -8,27 +8,40 @@
                         <span class='h2'>UF<span class='color-green'>O</span>ffice</span>
                     </div>
                     <div class="org-div text-center d-sm-flex d-none">
-                        <span class='h2'>{{orgname}}</span>
+                        <span class='h2'>{{Organization}}</span>
                     </div>  
                     <div class="burger-box">
-                        <router-link :to="({path: '/office_menu'})">
                             <button class="btn fs-18">
-                                <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='button-img'>
+                                <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" v-on:click="Switch()" class='button-img'>
                             </button>
-                        </router-link>
                     </div>
                 </div>
             </div>
             <div class="col-12 text-center d-block d-sm-none">
-                 <span class='h2'>{{orgname}}</span>
+                 <span class='h2'>{{Organization}}</span>
             </div>
         </div>
     </div>
 </div>
 </template>
 <script>
+import { mapGetters, mapActions } from "vuex";
 export default {
-    props:['orgname']
+    props:['orgname'],
+    computed: mapGetters(["Organization"]),
+    async mounted(){
+        this.getOrganization();
+    },
+    methods:{
+        Switch(){
+            if (this.orgname.type!='menu'){
+                this.$router.push('/office_menu');
+            }else{
+                this.$router.go('-1');
+            }
+        },
+        ...mapActions(['getOrganization'])
+    }
 }
 </script>
 <style scoped>
