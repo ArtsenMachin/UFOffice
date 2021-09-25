@@ -3,8 +3,8 @@ from resources import DB
 import json
 
 
-async def get_leaderboard(user_id):
-
+async def get_leaderboard_place(user_id):
+        
     data = await DB.conn.fetch(
         f'''
             with org as (
@@ -21,24 +21,32 @@ async def get_leaderboard(user_id):
             ),
             users as (
                 select
-                    *
+                    us.*,
+                    opt.org_id
                 from
                     ufoffice.users us
                 join ufoffice.org_participants opt
                     on us.user_id = opt.user_id
             )
             select
-                row_number() over() as rn,
-                t.* 
+            	*
             from (
-                select 
-                    user_fio,
-                    user_rating
-                from
-                    users
-                order by
-                    user_rating desc
-            ) t;
+	            select
+	                row_number() over() as rn,
+	                t.* 
+	            from (
+	                select 
+	                    user_fio,
+	                    user_rating,
+	                    user_id
+	                from
+	                    users
+	                order by
+	                    user_rating desc
+	            ) t
+			) t2
+			where
+				user_id = {int(user_id)};
         '''
         )
 
@@ -49,6 +57,4 @@ async def get_leaderboard(user_id):
         result.add_features('rating', str(item['user_rating']))
         result.add_features('position', str(item['rn']))
 
-        result.new_features_tuple()
-
-    return json.dumps(result.data[:-1], indent=2)
+    return json.dumps(result.data[0], indent=2)

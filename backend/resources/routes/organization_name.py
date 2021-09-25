@@ -1,6 +1,5 @@
 from flask import request
 from resources import DB
-
 from resources import app
 from resources.queries import get_organization_name
 
