@@ -1,17 +1,17 @@
 from flask import request
-from json import loads
 from resources import DB
+from json import loads
 from resources import app
-from resources.queries import check_user_login
+from resources.queries import task_status_upd
 
 
-@app.post('/login')
-async def login_user():
+@app.post('/update_task')
+async def organization():
     try:
         await DB.connect()
 
         data = request.data.decode('utf8')
-        output = await check_user_login(loads(data)['login'], loads(data)['password'])
+        output = await task_status_upd(loads(data)['id'])
 
         await DB.close()
 
