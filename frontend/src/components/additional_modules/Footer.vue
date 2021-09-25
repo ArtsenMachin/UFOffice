@@ -7,8 +7,6 @@
     .container-fluid{
         background-color: #402C87 !important;
         border-radius: 0 !important;
-    }
-    span{
         color: #F8F7F9;
     }
 </style>
