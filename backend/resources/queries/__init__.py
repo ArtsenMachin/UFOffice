@@ -5,4 +5,5 @@ from resources.queries.tasks import get_user_tasks
 from resources.queries.team_info import team_list
 from resources.queries.create_task import task_crt
 from resources.queries.organization_name import get_organization_name
-from resources.queries.leaderboard import leaderboard, leaderboard_place
+from resources.queries.leaderboard import get_leaderboard
+from resources.queries.leaderboard_place import get_leaderboard_place
