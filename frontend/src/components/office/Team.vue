@@ -1,6 +1,6 @@
 <template>
     <div id="team">
-        <div class="container mt-5" v-if="role!='teamlead'">
+        <div class="container mt-5" v-if="TeamWorker">
             <div class="desc-block text-center">
                 <div class="name headline h3">{{TeamWorker[i].name}}</div>
                 <div class="proffesion">{{TeamWorker[i].proffesion}}</div>
@@ -32,6 +32,9 @@
                     <div class="work-block">
                         <div class="name headline h3 mt-2">{{TeamWorker[i].work}}</div>
                         <div class="proffesion">{{TeamWorker[i].ttd}}</div>
+                        <div class="delete" v-if="role=='teamlead'">
+                            <button class='btn btn_default bg-red' v-on:click="DeleteWorker(TeamWorker[i].id)">Уволить</button>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-4 col-xl-3 order-3 order-md-3 mt-md-0 mt-2">
@@ -84,85 +87,51 @@
         </div>
         <div class="container teamlead-container mt-5" v-else>
             <div class="row g-0">
-                <div class="col-12 col-sm-6 col-md-4 col-xl-3 g-0"
-                v-if="TeamWorker">
-                    <div class="card team-card team"
-                        v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`"
-                        v-on:click="ShowComand()">
-                        <span class='h2'>{{TeamWorker[0].teamName}}</span>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 col-xl-3"
-                v-if="!TeamWorker">
+                <div class="col-12 col-sm-6 col-md-4 col-xl-3">
                     <div class="card team-card"
-                        v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
+                        v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`"
+                        v-on:click="newTeam()">
+                        <span class='display-4'><i class="fa fa-plus-square-o" aria-hidden="true"></i></span>
                     </div>
                 </div>
             </div>
-            <div class="row" v-if="ShowComand_temp">
-                <div class="col-12 col-sm-6 col-md-5 offset-md-1 col-xl-4 offset-xl-0"
-                v-for="worker in TeamWorker" :key="worker.id">
-                    <div class="card worker-card mt-2">
-                        <div class="btn-worker-class">
-                            <div class="actions">
-                                <div class='text-rigth' v-on:click='OpenDropdown(worker.id)'><i class="fa fa-pencil" aria-hidden="true"></i></div>
-                                <div class="card mt-2 dropdown text-center" v-bind:id="`worker`+worker.id">
-                                    Уволить
-                                </div>
-                            </div>
-                        </div>
-                        <div class="name-worker-card">
-                            <div class="round-image">
-                                <img v-bind:src="worker.img">
-                            </div>
-                            <div class="desc-block text-center">
-                                <div class="name headline h4">{{TeamWorker[i].name}}</div>
-                                <div class="proffesion">{{TeamWorker[i].proffesion}}</div>
-                            </div>
-                        </div>
-                        <div class="task-block-text text-center">
-                            <div class="name headline h3 mt-2">{{TeamWorker[i].work}}</div>
-                            <div class="proffesion">{{TeamWorker[i].ttd}}</div>
-                        </div>
-                        <div class="ss">
-                            <a v-bind:href="TeamWorker[i].phone">
-                                <div class="round-ss">
-                                    <span class='fs-16'>
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
-                            <a v-bind:href="`mailto:`+TeamWorker[i].mail">
-                                <div class="round-ss">
-                                    <span class='fs-16'>
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
-                            <a v-bind:href="TeamWorker[i].tg">
-                                <div class="round-ss">
-                                    <span class='fs-16'>
-                                    <i class="fa fa-telegram" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
-                            <a v-bind:href="TeamWorker[i].vk">
-                                <div class="round-ss">
-                                    <span class='fs-16'>
-                                    <i class="fa fa-vk" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
-                            <a v-bind:href="TeamWorker[i].fb">
-                                <div class="round-ss">
-                                    <span class='fs-16'>
-                                    <i class="fa fa-facebook-square" aria-hidden="true"></i>
-                                    </span>
-                                </div>
-                            </a>
+            <div class="card mt-5"
+            v-if="newTeamWin" @submit.prevent="addNewTeam(newteamInfo)">
+                <div class='headline h2 text-center mt-2'>Создание команды</div>
+                <form class='row'>
+                    <div class="col-12 col-md-8 offset-md-2">
+                        <label for="validationDefault3" class="form-label mt-3">Введите название команды</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="validationDefault3"  required v-model="newteamInfo.name">
                         </div>
                     </div>
-                </div>
+                    <div class="col-12 col-md-8 offset-md-2 mt-2">
+                         <div class='headline text-center'>Выберите сотрудников</div>
+                         <div class="row">
+                             <div class="col-12 col-sm-6 col-xl-4"
+                             v-for="new_worker in newWorker" :key="new_worker.id">
+                                 <div class="card mt-2 new-worker-card"
+                                 v-on:click="addWorker(new_worker.id)"
+                                 v-bind:id="`worker`+new_worker.id">
+                                     <div class="card-body text-center">
+                                         <div class="fs-18">{{new_worker.name}}</div>
+                                         <div class="fs-16">{{new_worker.proffesion}}</div>
+                                         <hr>
+                                         <div class="skills">
+                                            <div class="round-skill card mt-2"
+                                            v-for="skills in new_worker.skills" :key="skills.id">
+                                                <img v-bind:src="skills.img" class='img-fluid'>
+                                            </div>
+                                        </div>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="col-12 text-center mt-2 mb-2">
+                                 <button class='btn btn_default' type='submit'>Создать</button>
+                             </div>
+                         </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -170,29 +139,40 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-    computed: mapGetters(["TeamWorker"]),
+    computed: mapGetters(["TeamWorker", "newWorker"]),
     data(){
         return{
             i:0,
             role:'teamlead',
-            ShowComand_temp:false
+            newTeamWin:false,
+            newteamInfo:{
+                name:'',
+                workers:[]
+            }
         }
     },
     async mounted(){
         this.MenuLink();   
         this.getTeam();
+        //this.role=localStorage.role;
+        if(this.TeamWorker){
+            console.log(this.newWorker);
+            this.getNewTeam();
+        }
     },
     methods:{
-        ...mapActions(['getTeam']),
+        ...mapActions(['getTeam','DeleteTeamWorker','getNewTeam', "addNewTeam"]),
         MenuLink(){
             document.getElementById("link-card-3").classList.remove('active');
             document.getElementById("link-card-1").classList.remove('active');
             document.getElementById("link-card-2").classList.add('active');
-            let width=this.TeamWorker.length*280;
-            document.getElementById('overflow').style.width=width+"px";
+            if(!this.TeamWorker){
+                let width=this.TeamWorker.length*280;
+                document.getElementById('overflow').style.width=width+"px";
+            }
         },
-        ShowComand(){
-            this.ShowComand_temp=true;
+        DeleteWorker(id){
+            this.DeleteTeamWorker(id);
         },
         Prev(){
             if(this.i==0){
@@ -211,13 +191,24 @@ export default {
         Switch(id){
             this.i=id;
         },
-        OpenDropdown(id){
-            if(document.getElementById("worker"+id).style.display=='none'){
-                document.getElementById("worker"+id).style.display='flex'
+        newTeam(){
+            if (this.newTeamWin){
+                this.newTeamWin=false
             }else{
-                document.getElementById("worker"+id).style.display='none'
+                this.newTeamWin=true
             }
-           
+        },
+        addWorker(elem){
+            console.log(elem);
+            var index=this.newteamInfo.workers.indexOf(elem);
+            if(index<0){
+                document.getElementById(`worker`+elem).style.backgroundColor="#6d44ffbd";
+                this.newteamInfo.workers.push(elem);
+            }else{
+                document.getElementById(`worker`+elem).style.backgroundColor="#6d44ff6b";
+                this.newteamInfo.workers.splice(index, 1);
+               
+            }
         }
     }
 }
@@ -294,14 +285,12 @@ export default {
         border-radius: 5px;
         color: #F8F7F9;
         height: 150px;
-    }
-    .team{
         display: flex;
         flex-direction: row;
-        justify-content: flex-start;
-        align-items: flex-end;
+        justify-content: center;
+        align-items: center;
     }
-    .team:hover{
+    .team-card:hover{
         cursor: pointer;
         background-color: #6E44FF !important;
     }
@@ -340,46 +329,14 @@ export default {
     .teamlead-container{
         min-height: 60vh;
     }
-    .round-ss{
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #6E44FF;
-        color: #F8F7F9;
-        margin: 5px;
+    .new-worker-card{
+        border-radius: 5px;
+        border: 1px solid #6E44FF;
+        background-color: #6d44ff6b;
     }
-    .ss{
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-    .btn-worker-class{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
-    }
-    .actions{
-        width: 80px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-    }
-    .dropdown{
-        width: 100%;
-        display: none;
-        padding: 2.5px;
-        background-color: #EE562F;
-        color: #F8F7F9;
-    }
-    .text-rigth{
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: flex-end;
+    .new-worker-card:hover{
+        cursor: pointer;
+        background-color: #6d44ffbd;
+        transition:ease-in 0.3s;
     }
 </style>

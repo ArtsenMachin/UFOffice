@@ -109,7 +109,8 @@ button::-moz-focus-inner {
   background-color: #33EBC9;
 }
 .bg-red{
-  background-color: #EE562F;
+  background-color: #EE562F !important;
+  border-color: #EE562F !important;
 }
 .button-img{
         height: 25px;
