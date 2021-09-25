@@ -146,7 +146,7 @@
                             <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="5000">
-                            <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">
+                            <img v-bind:src="require(`@/assets/img/office_screen_1.png`)" class="d-block w-100" alt="...">
                             </div>
                             <div class="carousel-item" data-bs-interval="5000"> 
                             <img v-bind:src="require(`@/assets/img/office.png`)" class="d-block w-100" alt="...">

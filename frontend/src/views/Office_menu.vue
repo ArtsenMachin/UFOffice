@@ -40,7 +40,7 @@
                         <div class="back-block"
                         v-bind:style="`background: url(${require('@/assets/img/back-link-2.png')}) repeat`">
                            <div class="link-header">
-                                <span class='headline h1'>Команда</span>
+                                <span class='headline h1'>Навыки</span>
                             </div>
                             <div class="link-image">
                                 <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='img-fluid'>

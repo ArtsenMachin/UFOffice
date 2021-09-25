@@ -15,6 +15,8 @@
                             </div>
                             <span class='h4 mt-1'>Описание:</span>
                             <span class='fs-18'>{{task.description}}</span>
+                            <button class='btn btn_default mt-1' v-on:click="SaveCard(task.id)"
+                            v-if="write_btn">Выполнено</button>
                         </div>
                     </div>
                 </div>
@@ -23,11 +25,13 @@
     </div>
 </template>
 <script>
+import { mapActions } from "vuex";
 export default {
     props:['task'],
     data(){
         return{
-            alert:''
+            alert:'',
+            write_btn:false
         }
     },
     mounted(){
@@ -41,13 +45,21 @@ export default {
             if(this.task.status==='active'){
                 this.alert='В работе';
             }else{ 
-            if(this.task.status==='inactive'){
-                this.alert='Успешно!';
-            }else{
-                this.alert='ПРОСРОЧЕНО!';
+                if(this.task.status==='inactive'){
+                    this.alert='Успешно!';
+                }else{
+                    this.alert='ПРОСРОЧЕНО!';
+                }
             }
-        }
-        }
+            if(this.task.user_id===localStorage.user_id && this.task.status!='inactive'){
+                this.write_btn=true;
+            }
+        },
+        SaveCard(id){
+            this.readyCard(id);
+            this.CloseModalWindow();
+        },
+        ...mapActions(['readyCard']),
     }
 }
 </script>
