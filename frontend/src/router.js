@@ -26,7 +26,7 @@ export default new Router({
         component: ()=> import('@/views/Office_menu'),
       },
       {
-        path:'/office/:id',
+        path:'/office',
         component: ()=> import('@/views/Office'),
         children:[
           {
@@ -44,8 +44,12 @@ export default new Router({
         ]
       },
       {
-        path:'/liderboard/:id',
+        path:'/liderboard',
         component: ()=> import('@/views/Liderboard') 
+      },
+      {
+        path:'/ability',
+        component: ()=> import('@/views/Ability') 
       },
       {
         path: "*",

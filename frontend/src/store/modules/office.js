@@ -139,7 +139,20 @@ export default {
               .catch((error) => {
                 console.error(error);
               }); 
-        }
+        },
+        async newTask(ctx, task){
+            const path = 'http://localhost:5000/add_new_task';
+            var data;
+            var taskInfo=task;
+            axios.post(path, taskInfo)
+              .then((res) => {
+                data = res.data;
+                ctx.commit('updateTask', data)
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
+        },
 
     },
 
