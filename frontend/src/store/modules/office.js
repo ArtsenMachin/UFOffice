@@ -2,13 +2,9 @@ import axios from "axios"
 export default {
     actions: {
         async getTask(ctx){
-            const path = 'http://localhost:5000/tasks';
+            const path = 'http://26.237.70.37:5000/tasks?org_id=1';
             var data;
-            var userInfo={
-                login:localStorage.login,
-                token:localStorage.token
-            }
-            axios.get(path, userInfo)
+            axios.get(path)
               .then((res) => {
                 data = res.data;
                 ctx.commit('updateTask', data)
@@ -18,13 +14,11 @@ export default {
               }); 
         },
         async getTeam(ctx){
-            const path = 'http://localhost:5000/team';
+            // var user=localStorage.token
+            var user=3;
+            const path = 'http://26.237.70.37:5000/team?user_id='+user;
             var data;
-            var userInfo={
-                login:localStorage.login,
-                token:localStorage.token
-            }
-            axios.get(path, userInfo)
+            axios.get(path)
               .then((res) => {
                 data = res.data;
                 ctx.commit('updateTeam', data)
@@ -34,7 +28,7 @@ export default {
               }); 
         },
         async getLiderboard(ctx){
-            const path = 'http://localhost:5000/liderboard';
+            const path = 'http://26.237.70.37:5000/liderboard';
             var data;
             var userInfo={
                 login:localStorage.login,
@@ -50,7 +44,7 @@ export default {
               }); 
         },
         async getUserRating(ctx){
-            const path = 'http://localhost:5000/userrating';
+            const path = 'http://26.237.70.37:5000/userrating';
             var data;
             var userInfo={
                 login:localStorage.login,
@@ -66,7 +60,7 @@ export default {
               }); 
         },
         async getOrganization(ctx){
-            const path = 'http://localhost:5000/organization';
+            const path = 'http://26.237.70.37:5000/organization';
             var data;
             var userInfo={
                 login:localStorage.login,
@@ -82,7 +76,7 @@ export default {
               }); 
         },
         async readyCard(ctx, id){
-            const path = 'http://localhost:5000/update_task';
+            const path = 'http://26.237.70.37:5000/update_task';
             var data;
             var taskInfo={
                 task_id:id,
@@ -97,7 +91,7 @@ export default {
               }); 
         },
         async DeleteTeamWorker(ctx, id){
-            const path = 'http://localhost:5000/delete_worker';
+            const path = 'http://26.237.70.37:5000/delete_worker';
             var data;
             var workerInfo={
                 task_id:id,
@@ -112,7 +106,7 @@ export default {
               }); 
         },
         async getNewTeam(ctx){
-            const path = 'http://localhost:5000/get_new_team';
+            const path = 'http://26.237.70.37:5000/get_new_team';
             var data;
             var userInfo={
                 login:localStorage.login,
@@ -128,7 +122,7 @@ export default {
               }); 
         },
         async addNewTeam(ctx, workers){
-            const path = 'http://localhost:5000/add_new_team';
+            const path = 'http://26.237.70.37:5000/add_new_team';
             var data;
             var teamInfo=workers;
             axios.post(path, teamInfo)
@@ -141,7 +135,7 @@ export default {
               }); 
         },
         async newTask(ctx, task){
-            const path = 'http://localhost:5000/add_new_task';
+            const path = 'http://26.237.70.37:5000/add_new_task';
             var data;
             var taskInfo=task;
             axios.post(path, taskInfo)
@@ -320,131 +314,7 @@ export default {
                 ]
             }
         ],
-        team:[
-            {
-                name:'Микульский Никита',
-                proffesion:'дизайнер',
-                img:require(`@/assets/img/team_icon_2.png`),
-                mail:'makaka@gmail.com',
-                phone:'+7(814)-233-22-11',
-                tg:'',
-                vk:'',
-                fb:'',
-                work:'Работа не вовк',
-                ttd:'12:36:56',
-                position:0,
-                rating:'200',
-                id: 0,
-                teamName:'Cheemsburger',
-                skills:[
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        tooltip:'елда',
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        tooltip:'елда',
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        tooltip:'елда',
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        tooltip:'елда',
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        tooltip:'елда',
-                    }
-                ]
-            },
-            {
-                name:'Микульский Никита',
-                proffesion:'дизайнер',
-                img:require(`@/assets/img/Worker_icon.png`),
-                mail:'makaka@gmail.com',
-                phone:'+7(814)-233-22-11',
-                tg:'',
-                vk:'',
-                fb:'',
-                work:'Работа не вовк',
-                ttd:'12:36:56',
-                position:1,
-                rating:'200',
-                id: 1,
-                skills:[
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    }
-                ]
-            },
-            {
-                name:'Микульский Никита',
-                proffesion:'дизайнер',
-                img:require(`@/assets/img/Worker_icon.png`),
-                mail:'makaka@gmail.com',
-                phone:'+7(814)-233-22-11',
-                tg:'',
-                vk:'',
-                fb:'',
-                work:'Работа не вовк',
-                ttd:'12:36:56',
-                position:2,
-                rating:'200',
-                id: 2,
-                skills:[
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    },
-                    {
-                        img:require('@/assets/img/Office_icon_re.png'),
-                        
-                    }
-                ]
-            }
-        ],
+        team:'',
         lider:[
             {
                 name:'ФИО',

@@ -59,7 +59,7 @@ async def team_list(user_id):
 						org_p1.org_id = org.org_id
             	)
             order by
-                us.user_id;
+                (row_number() over())-1;
         '''
     )
     

@@ -152,11 +152,10 @@ export default {
         }
     },
     async mounted(){
-        this.MenuLink();   
         this.getTeam();
+        this.MenuLink();   
         //this.role=localStorage.role;
-        if(this.TeamWorker){
-            console.log(this.newWorker);
+        if(!this.TeamWorker){
             this.getNewTeam();
         }
     },
@@ -166,9 +165,9 @@ export default {
             document.getElementById("link-card-3").classList.remove('active');
             document.getElementById("link-card-1").classList.remove('active');
             document.getElementById("link-card-2").classList.add('active');
-            if(!this.TeamWorker){
-                let width=this.TeamWorker.length*280;
-                document.getElementById('overflow').style.width=width+"px";
+            if(this.TeamWorker){
+                //let width=this.TeamWorker.length*280;
+                document.getElementById('overflow').style.width="1400px";
             }
         },
         DeleteWorker(id){
@@ -214,6 +213,12 @@ export default {
 }
 </script>
 <style scoped>
+    #overflow{
+        width: 1400px;
+    }
+    .image-block img{
+        max-height: 400px !important;
+    }
     .desc-block{
         width: 100%;
     }

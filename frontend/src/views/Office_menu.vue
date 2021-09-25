@@ -90,7 +90,7 @@
                                         <span class='headline h1'>Справка</span>
                                     </div>
                                     <div class="link-image">
-                                        <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='img-fluid'>
+                                        <img v-bind:src="require(`@/assets/img/faq.svg`)" class='img-fluid'>
                                     </div>
                                 </div>
                             </div>
@@ -116,6 +116,7 @@ export default {
     },
     mounted(){
         this.CheckIn();
+        console.log(localStorage);
     },
     methods:{
         CheckIn(){

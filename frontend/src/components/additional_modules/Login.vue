@@ -62,7 +62,7 @@
 </template>
 
 <script>
-//import axios from 'axios'
+import axios from 'axios'
 export default {
     components:{
     },
@@ -76,21 +76,21 @@ export default {
     },
     methods:{
         onSignin(){
-          /*  const path = 'http://26.173.145.160:5000/log_in';
+          const path = 'http://26.237.70.37:5000/login';
             axios.post(path, this.userInfo)
             .then((res) => {
                 if (res.data=='wrong'){
                     this.mistake='anotherLogin';
                 }else{
                     this.mistake='';
-                     localStorage.setItem('login', res.data.login);
+                    localStorage.setItem('login', res.data.login);
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('role', res.data.role);
-                    localStorage.setItem('role', res.data.id);
-                    this.$router.push({ name: 'user', params: { userId: res.data.login }})
+                    localStorage.setItem('id', res.data.token);
+                    this.$router.push('/office_menu');
                 }
-            })*/
-            this.$router.push('/office_menu');
+            })
+            
         }
     }
 }
