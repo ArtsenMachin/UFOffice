@@ -8,7 +8,7 @@
                         <span class='h2'>UF<span class='color-green'>O</span>ffice</span>
                     </div>
                     <div class="org-div text-center d-sm-flex d-none">
-                        <span class='h2'>{{Organization}}</span>
+                        <span class='h2'>Cheemsburger</span>
                     </div>  
                     <div class="burger-box">
                             <button class="btn fs-18">
@@ -18,20 +18,15 @@
                 </div>
             </div>
             <div class="col-12 text-center d-block d-sm-none">
-                 <span class='h2'>{{Organization}}</span>
+                 <span class='h2'>Cheemsburger</span>
             </div>
         </div>
     </div>
 </div>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
 export default {
     props:['orgname'],
-    computed: mapGetters(["Organization"]),
-    async mounted(){
-        this.getOrganization();
-    },
     methods:{
         Switch(){
             if (this.orgname.type!='menu'){
@@ -39,8 +34,7 @@ export default {
             }else{
                 this.$router.go('-1');
             }
-        },
-        ...mapActions(['getOrganization'])
+        }
     }
 }
 </script>

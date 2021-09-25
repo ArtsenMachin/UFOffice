@@ -8,7 +8,7 @@
                             <div class="exit-block">
                                 <button class='btn' @click="CloseModalWindow()"><span class='h5'><i class="fa fa-times" aria-hidden="true"></i></span></button>
                             </div>
-                            <span class='fs-24 h4'>{{task.name}}</span>
+                            <span class='fs-24 h4'>Vue JS</span>
                             <div class="time-block mt-1">
                                 <span class='fs-18'>Срок:&nbsp;{{task.time}}&nbsp;</span>
                                 <div v-bind:class="task.status" class='color-white'>{{alert}}</div>
@@ -33,51 +33,14 @@ export default {
             write_btn:false
         }
     },
-    mounted(){
-        this.Alerts();
-    },
     methods:{
         CloseModalWindow(){
            this.$emit('closeModal');
-        },
-        Alerts(){
-            if(this.task.status==='active'){
-                this.alert='В работе';
-            }else{ 
-                if(this.task.status==='inactive'){
-                    this.alert='Успешно!';
-                }else{
-                    this.alert='ПРОСРОЧЕНО!';
-                }
-            }
-            console.log(localStorage);
-            if(this.task.user_id==localStorage.id && this.task.status!='inactive'){
-                this.write_btn=true;
-            }
-        },
-        SaveCard(id){
-            this.$emit('updateStatusTask', {
-            card_id: id,
-            });
-            this.CloseModalWindow();
         },
     }
 }
 </script>
 <style scoped>
-.active{
-    background-color: #6E44FF;
-}
-.inactive{
-    background-color: #20E9C4;
-}
-.stillactive{
-    background-color: #EE562F;
-}
-.active, .inactive, .stillactive{
-    padding: 2.5px;
-    border-radius: 5px;
-}
 #taskmodal{
     min-width: 100% !important;
     min-height: 100% !important;

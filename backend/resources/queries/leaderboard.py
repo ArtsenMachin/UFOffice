@@ -4,7 +4,7 @@ import json
 
 
 async def leaderboard(user_id):
-        
+  
     data = await DB.conn.fetch(
         f'''
             with org as (

@@ -43,7 +43,7 @@
                                 <span class='headline h1'>Навыки</span>
                             </div>
                             <div class="link-image">
-                                <img v-bind:src="require(`@/assets/img/Menu_Burger.svg`)" class='img-fluid'>
+                                <img v-bind:src="require(`@/assets/img/skills.svg`)" class='img-fluid'>
                             </div>
                         </div>
                     </div>

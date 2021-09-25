@@ -13,7 +13,7 @@
                         <div class="skills">
                             <div class="round-skill card mt-2"
                             v-for="skills in TeamWorker[i].skills" :key="skills.id">
-                                <img v-bind:src="skills.img" class='img-fluid'>
+                                <img v-bind:src="skills.skill_img" class='img-fluid'>
                             </div>
                         </div>
                         <div class="rating mt-2 text-left">
@@ -233,6 +233,7 @@ export default {
     }
     .round-skill img{
         height: 50px !important;
+        border-radius: 50%;
     }
     .info-card{
         padding: 15px;

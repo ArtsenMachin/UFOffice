@@ -45,28 +45,22 @@ export default {
             cvn.addEventListener('click', handlerClickCanvas);
             function handlerClickCanvas(e) {
                 if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 175 && e.offsetY < 320) { 
-                        console.log('Мужик');
-                        this.$router.push("/office/team");
+                        window.location.replace("/office/team");
                 } 
                 else if(e.offsetX < 481 && e.offsetX > 325 && e.offsetY > 250 && e.offsetY < 395) {
-                        console.log('Не мужик');
-                        this.$router.push("/office/team");
+                       window.location.replace("/office/team");
                 }
                 else if(e.offsetX < 781 && e.offsetX > 625 && e.offsetY > 260 && e.offsetY < 405) {
-                        console.log('Мужик');
-                        this.$router.push("/office/team");
+                        window.location.replace("/office/team");
                 }
                 else if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 340 && e.offsetY < 485) {
-                        console.log('Пусто 2');
-                        this.$router.push("/office/team");
+                        window.location.replace("/office/team");
                 }
                 else if(e.offsetX < 716 && e.offsetX > 588 && e.offsetY > 25 && e.offsetY < 175) {
-                        console.log('Доска');
-                        this.$router.push("/office/team");
+                        window.location.replace("/office/task");
                 }
                 else if(e.offsetX < 931 && e.offsetX > 775 && e.offsetY > 350 && e.offsetY < 495) {
-                        console.log('Пусто 3');
-                        this.$router.push("/office/team");
+                        window.location.replace("/office/team");
                 }
                 else {
                     console.log('Тута не жми!')
