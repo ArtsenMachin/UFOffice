@@ -8,11 +8,11 @@
                 <div class="row">
                     <div class="col-6 text-center">
                         <div class="headline h2">Ваш рейтинг</div>
-                        <div class="text display-5 logo">200</div>
+                        <div class="text display-5 logo">{{userRating.rating}}</div>
                     </div>
                     <div class="col-6 text-center">
                         <div class="headline h2">Ваш ранг</div>
-                        <div class="text display-5 logo">3</div>
+                        <div class="text display-5 logo">{{userRating.position}}</div>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,7 @@
                 <img v-bind:src="require(`@/assets/img/liderboard.svg`)">
             </div>
            <div class="card lider-card"
-            v-for="worker in worker" :key="worker.id">
+            v-for="worker in Liderboard" :key="worker.id">
                 <span class='fs-24'
                 v-bind:class="'pos'+worker.position">{{worker.position}}</span>
                 <span class='fs-24'>{{worker.name}}</span>
@@ -34,58 +34,25 @@
 </template>
 
 <script>
-import TopMenuOffice from "@/components/office/TopMenuOffice.vue"
+import TopMenuOffice from "@/components/office/TopMenuOffice.vue";
+import { mapGetters, mapActions } from "vuex";
 export default {
   components: {TopMenuOffice},
+  computed: mapGetters(["Liderboard", "userRating"]),
   data(){
       return{
           orgname:{
-               name:'Название организации',
                type:'notmenu'
-            },   
-          worker:[
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'1'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'2'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'3'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'4'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'5'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'6'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'7'
-              },
-              {
-                  name:'хуейм',
-                  rating:'500',
-                  position:'8'
-              },
-          ]
+            }
       }
+  },
+  async mounted(){
+      this.getLiderboard();
+      this.getUserRating();
+  },
+  methods: {
+      ...mapActions(['getLiderboard']),
+      ...mapActions(['getUserRating'])
   }
 }
 </script>
