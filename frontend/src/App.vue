@@ -66,6 +66,9 @@ a{
 .color-blue{
   color: #6E44FF;
 }
+.color-white{
+  color: #F8F7F9;
+}
 button:active, button:focus {
   outline: none !important;
   box-shadow: unset !important;
