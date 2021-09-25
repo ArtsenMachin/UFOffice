@@ -95,9 +95,54 @@ export default {
               .catch((error) => {
                 console.error(error);
               }); 
+        },
+        async DeleteTeamWorker(ctx, id){
+            const path = 'http://localhost:5000/delete_worker';
+            var data;
+            var workerInfo={
+                task_id:id,
+            }
+            axios.post(path, workerInfo)
+              .then((res) => {
+                data = res.data;
+                ctx.commit('updateTeam', data)
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
+        },
+        async getNewTeam(ctx){
+            const path = 'http://localhost:5000/get_new_team';
+            var data;
+            var userInfo={
+                login:localStorage.login,
+                token:localStorage.token
+            }
+            axios.get(path, userInfo)
+              .then((res) => {
+                data = res.data;
+                ctx.commit('updateNewTeam', data)
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
+        },
+        async addNewTeam(ctx, workers){
+            const path = 'http://localhost:5000/add_new_team';
+            var data;
+            var teamInfo=workers;
+            axios.post(path, teamInfo)
+              .then((res) => {
+                data = res.data;
+                ctx.commit('updateTeam', data)
+              })
+              .catch((error) => {
+                console.error(error);
+              }); 
         }
 
     },
+
     mutations: {
         updateTask(state, worker){
             state.worker=worker
@@ -113,9 +158,13 @@ export default {
         },
         updateUserRating(state, user_rating){
             state.user_rating=user_rating
+        },
+        updateNewTeam(state, new_worker){
+            state.new_worker=new_worker
         }
 
     },
+
     getters: {
         TaskWorker(state){
             return state.worker;
@@ -131,8 +180,12 @@ export default {
         },
         userRating(state){
             return state.user_rating;
+        },
+        newWorker(state){
+            return state.new_worker;
         }
     },
+
     state: {
         worker:[
             {
@@ -381,22 +434,22 @@ export default {
         ],
         lider:[
             {
-                name:'хуейм',
+                name:'ФИО',
                 rating:'500',
                 position:'1'
             },
             {
-                name:'хуейм',
+                name:'ФИО',
                 rating:'500',
                 position:'2'
             },
             {
-                name:'хуейм',
+                name:'ФИО',
                 rating:'500',
                 position:'3'
             },
             {
-                name:'хуейм',
+                name:'ФИО',
                 rating:'500',
                 position:'4'
             }
@@ -405,6 +458,46 @@ export default {
         user_rating:{
             rating: '300',
             position: '2'
-        }
+        },
+        new_worker:[
+            {
+            name:'Микульский Никита',
+            proffesion:'дизайнер',
+            id: 0,
+            skills:[
+                {
+                    img:require('@/assets/img/Office_icon_re.png'),
+                    tooltip:'елда',
+                },
+                {
+                    img:require('@/assets/img/Office_icon_re.png'),
+                    tooltip:'елда',
+                },
+                {
+                    img:require('@/assets/img/Office_icon_re.png'),
+                    tooltip:'елда',
+                }
+                ]
+            },
+            {
+                name:'Микульский Никита',
+                proffesion:'дизайнер',
+                id: 1,
+                skills:[
+                    {
+                        img:require('@/assets/img/Office_icon_re.png'),
+                        tooltip:'елда',
+                    },
+                    {
+                        img:require('@/assets/img/Office_icon_re.png'),
+                        tooltip:'елда',
+                    },
+                    {
+                        img:require('@/assets/img/Office_icon_re.png'),
+                        tooltip:'елда',
+                    }
+                    ]
+                }
+        ]
     }
 }

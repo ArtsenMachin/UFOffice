@@ -7,7 +7,11 @@
 </template>
 
 <script>
-import BgImage from "@/assets/img/canvasback.png";
+import BgImage from "@/assets/img/Canvas_back.png";
+import EmptyImg from "@/assets/img/Work_place_empty.png";
+import WomanImg from "@/assets/img/Work_place_woman.png";
+import ManImg from "@/assets/img/Work_place_man.png";
+import DeskImg from "@/assets/img/Deskboard.png";
 export default {
     mounted(){
         this.startGame();
@@ -19,15 +23,79 @@ export default {
             let ctx = cvn.getContext("2d");  
             let bg = new Image();
             bg.src = BgImage;
-            bg.onload = function() {
+            let Emp = new Image();
+            Emp.src = EmptyImg;
+            let WoI = new Image();
+            WoI.src = WomanImg;
+            let MaI = new Image();
+            MaI.src = ManImg;
+            let DeI = new Image();
+            DeI.src = DeskImg;
+            cvn.width = 1300;
+            cvn.height = 575;
+            DeI.onload = function() {
                 ctx.drawImage(bg, 0, 0, cvn.width, cvn.height);
+                ctx.drawImage(Emp, 475, 175, 156, 145);
+                ctx.drawImage(WoI, 325, 250, 156, 145);
+                ctx.drawImage(MaI, 625, 260, 156, 145);
+                ctx.drawImage(Emp, 475, 340, 156, 145);
+                ctx.drawImage(Emp, 775, 350, 156, 145);
+                ctx.drawImage(DeI, 588, 25, 128, 150);
             };
+            cvn.addEventListener('click', handlerClickCanvas);
+            function handlerClickCanvas(e) {
+                if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 175 && e.offsetY < 320) { 
+                        console.log('Пусто 1');
+                } 
+                else if(e.offsetX < 481 && e.offsetX > 325 && e.offsetY > 250 && e.offsetY < 395) {
+                        console.log('Не мужик');
+                }
+                else if(e.offsetX < 781 && e.offsetX > 625 && e.offsetY > 260 && e.offsetY < 405) {
+                        console.log('Мужик');
+                }
+                else if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 340 && e.offsetY < 485) {
+                        console.log('Пусто 2');
+                }
+                else if(e.offsetX < 716 && e.offsetX > 588 && e.offsetY > 25 && e.offsetY < 175) {
+                        console.log('Доска');
+                }
+                else if(e.offsetX < 931 && e.offsetX > 775 && e.offsetY > 350 && e.offsetY < 495) {
+                        console.log('Пусто 3')
+                }
+                else {
+                    console.log('Тута не жми!')
+                }
+            }
+            cvn.onmousemove = function handlerMouseOverCanvas(e) {
+                if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 175 && e.offsetY < 320) { 
+                        document.getElementById("canvas").classList.add("cursor");
+                } 
+                else if(e.offsetX < 481 && e.offsetX > 325 && e.offsetY > 250 && e.offsetY < 395) {
+                        document.getElementById("canvas").classList.add("cursor");
+                }
+                else if(e.offsetX < 781 && e.offsetX > 625 && e.offsetY > 260 && e.offsetY < 405) {
+                        document.getElementById("canvas").classList.add("cursor");
+                }
+                else if(e.offsetX < 631 && e.offsetX > 475 && e.offsetY > 340 && e.offsetY < 485) {
+                        document.getElementById("canvas").classList.add("cursor");
+                }
+                else if(e.offsetX < 716 && e.offsetX > 588 && e.offsetY > 25 && e.offsetY < 175) {
+                        document.getElementById("canvas").classList.add("cursor");
+                }
+                else if(e.offsetX < 931 && e.offsetX > 775 && e.offsetY > 350 && e.offsetY < 495) {
+                        document.getElementById("canvas").classList.add("cursor");
+                }
+                else {
+                    document.getElementById("canvas").classList.remove("cursor");
+                }
+            }
         },
         MenuLink(){
             document.getElementById("link-card-2").classList.remove('active');
             document.getElementById("link-card-3").classList.remove('active');
             document.getElementById("link-card-1").classList.add('active');
       }
+
     }
 }
 </script>
@@ -41,7 +109,10 @@ export default {
     }
     .canvas{
         width: 100%;
-        height: 600px;
+        height: 575px;
         border-radius: 10px;
+    }
+    .cursor{
+        cursor: pointer;
     }
 </style>

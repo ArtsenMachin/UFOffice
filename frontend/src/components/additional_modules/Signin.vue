@@ -128,6 +128,7 @@ export default {
                     localStorage.setItem('login', res.data.login);
                     localStorage.setItem('token', res.data.token);
                     localStorage.setItem('role', res.data.role);
+                    localStorage.setItem('role', res.data.id);
                     this.$router.push({ name: 'user', params: { userId: res.data.login }})
                 }
             })*/
