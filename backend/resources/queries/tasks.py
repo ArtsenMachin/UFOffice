@@ -24,9 +24,9 @@ async def get_user_tasks(org_id=1):
     result = json_serializable(f'tasks_org_{org_id}')
 
     for item in users:
-        result.add_features('user_fio', str(item['user_fio']))
-        result.add_features('profession_name', str(item['profession_name']))
-        result.add_features('user_id', str(item['user_id']))
+        result.add_features('name', str(item['user_fio']))
+        result.add_features('proffesion', str(item['profession_name']))
+        result.add_features('id', str(item['user_id']))
         
         result.add_feature_list('tasks')
 
@@ -37,7 +37,7 @@ async def get_user_tasks(org_id=1):
                     to_char(ts.end_dt, 'dd.mm.yyyy') end_dt,
                     ts.ach_pts,
                     ts.task_desc,
-                    tsnm.task_status_name,
+                    tsnm.task_status_sysname,
                     ts.task_id,
                     us.user_id
                 from
@@ -55,13 +55,13 @@ async def get_user_tasks(org_id=1):
             '''
         )
         for task in tasks:
-            result.data[0]['tasks'].append(
+            result.data[result.t_index]['tasks'].append(
                 {
                     'name': task['task_name'],
                     'time': task['end_dt'],
                     'level': task['ach_pts'],
                     'description': task['task_desc'],
-                    'status': task['task_status_name'],
+                    'status': task['task_status_sysname'],
                     'id': task['task_id'],
                     'user_id': task['user_id']
                 }
@@ -69,5 +69,5 @@ async def get_user_tasks(org_id=1):
 
         result.new_features_tuple()
 
-    print(result.data[:-1])
+    print(json.dumps(result.data[:-1], indent=2))
     return json.dumps(result.data[:-1], indent=2)

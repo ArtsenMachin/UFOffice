@@ -170,6 +170,9 @@ export default {
         width: 50%;
         border-radius: 5px;
         padding: 2.5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
     }
     .active{
         background-color: #6E44FF;

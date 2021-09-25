@@ -116,6 +116,7 @@ export default {
     },
     mounted(){
         this.CheckIn();
+        console.log(localStorage);
     },
     methods:{
         CheckIn(){
