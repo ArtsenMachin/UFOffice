@@ -6,7 +6,7 @@ from resources.queries import task_status_upd
 
 
 @app.post('/update_task')
-async def organization():
+async def task_upd():
     try:
         await DB.connect()
 

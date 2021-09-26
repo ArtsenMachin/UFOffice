@@ -8,15 +8,29 @@
                             <div class="exit-block">
                                 <button class='btn' @click="CloseModalWindow()"><span class='h5'><i class="fa fa-times" aria-hidden="true"></i></span></button>
                             </div>
-                            <span class='fs-24 h4'>Vue JS</span>
-                            <div class="time-block mt-1">
-                                <span class='fs-18'>Срок:&nbsp;{{task.time}}&nbsp;</span>
-                                <div v-bind:class="task.status" class='color-white'>{{alert}}</div>
+                            <div class='fs-24 h4 text-center'>Vue JS</div>
+                            <div class="mt-2 fs-18">
+                                1. Изучение основ
                             </div>
-                            <span class='h4 mt-1'>Описание:</span>
-                            <span class='fs-18'>{{task.description}}</span>
-                            <button class='btn btn_default mt-1' v-on:click="SaveCard(task.id)"
-                            v-if="write_btn">Выполнено</button>
+                            <div class="mt-1 fs-16">
+                                Прочитайте и изучите статью о начале работы во VueJs
+                                <a href='https://ru.vuejs.org/v2/guide/#Начало-работы'>https://ru.vuejs.org/v2/guide/#Начало-работы</a>
+                            </div>
+                            <div class="mt-2 fs-18">
+                                2. Пройдите введение о работе с VueJs до конца
+                            </div>
+                            <div class="mt-1 fs-16">
+                                Прочитайте и изучите статью о начале работы во VueJs
+                                <a href='https://ru.vuejs.org/v2/guide/index.html#Декларативная-отрисовка'>https://ru.vuejs.org/v2/guide/index.html#Декларативная-отрисовка</a>
+                            </div>
+                            <div class="mt-2 fs-18">
+                                3. Практика
+                            </div>
+                            <div class="mt-1 fs-16">
+                                Посмотрите видео и закрепите полученные знания с помощью тестового задания<br>
+                                <a href='https://www.youtube.com/watch?v=OlnwgS-gk8Y&t=281s'>видео</a>,
+                                <a href='https://docs.google.com/document/d/1oQcukpTSnlL1rOgO26Hkl0ljx_f7247xdApRPEcL_Nw/edit?usp=sharing'>тестовое задание</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -56,7 +70,7 @@ export default {
 .overlay-content{
     height: 100%;
     width: 100%;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 .card{
     display: flex;
@@ -79,5 +93,8 @@ export default {
     flex-direction: row;
     justify-content: flex-start;
     align-items: baseline;
+}
+a{
+    color: #6E44FF !important;
 }
 </style>

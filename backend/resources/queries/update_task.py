@@ -7,7 +7,7 @@ async def task_status_upd(task_id):
         f'''
             update ufoffice.task_status
                 set task_status_name_id=2
-                where task_status_id={int(task_id)};
+                where task_id={int(task_id)};
         '''
     )
 
