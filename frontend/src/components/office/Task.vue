@@ -99,7 +99,7 @@ export default {
       },
       updateStatusTask(task){
         const path = 'http://26.237.70.37:5000/update_task';
-        axios.post(path, task.card_id)
+        axios.post(path, task)
             .then((res) => {
                 console.log(res);
                 this.getTask();

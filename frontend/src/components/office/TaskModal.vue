@@ -55,9 +55,9 @@ export default {
                 this.write_btn=true;
             }
         },
-        SaveCard(id){
+        SaveCard(el){
             this.$emit('updateStatusTask', {
-            card_id: id,
+            id: el,
             });
             this.CloseModalWindow();
         },
