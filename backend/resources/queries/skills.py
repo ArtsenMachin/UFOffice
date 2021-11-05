@@ -2,6 +2,9 @@ from resources import DB
 from resources.services import json_serializable
 
 
+#
+# Навыки пользователя
+#
 async def skills_info(user_id):
 
     values = await DB.conn.fetch(

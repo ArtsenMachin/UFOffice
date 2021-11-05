@@ -4,6 +4,9 @@ from resources.queries import skills_info
 import json
 
 
+#
+# Список участников в команде
+#
 async def team_list(user_id):
 
     values = await DB.conn.fetch(
@@ -40,24 +43,24 @@ async def team_list(user_id):
                 (row_number() over())-1 as position_usr,
                 us.user_rating,
                 us.user_id,
-                org.org_name
+                team.team_name
             from
                 ufoffice.users us
-            join ufoffice.org_participants org_p
-                on org_p.user_id = {user_id} 
-            join ufoffice.organizations org
-                on org.org_id = org_p.org_id
+            join ufoffice.team_participants team_p
+                on team_p.user_id = 3
+            join ufoffice.teams team
+                on team.team_id = team_p.team_id
             join ufoffice.professions pr
                 on pr.profession_id = us.profession_id
             where
-            	us.user_id in (
-	            	select
-						org_p1.user_id
-					from
-						ufoffice.org_participants org_p1
-					where 
-						org_p1.org_id = org.org_id
-            	)
+                us.user_id in (
+                    select
+                        team_p1.user_id
+                    from
+                        ufoffice.team_participants team_p1
+                    where 
+                        team_p1.team_id = team.team_id
+                )
             order by
                 (row_number() over())-1;
         '''
@@ -80,12 +83,33 @@ async def team_list(user_id):
         result.add_features('position', str(item['position_usr']))
         result.add_features('rating', str(item['user_rating']))
         result.add_features('id', str(item['user_id']))
-        result.add_features('teamName', str(item['org_name']))
-        print(item['user_id'])
+        result.add_features('teamName', str(item['team_name']))
 
         result.add_feature_list('skills')
         result.data[result.t_index]['skills'].extend(await skills_info(item['user_id']))
         result.new_features_tuple()
 
-    print(json.dumps(result.data[:-1], indent=2))
     return json.dumps(result.data[:-1], indent=2)
+
+
+#
+# Название команды
+#
+async def get_team_name(user_id):
+
+    result = await DB.conn.fetch(
+        f'''
+            select
+                team.team_name
+            from
+                ufoffice.users us
+            join ufoffice.team_participants opt
+                on opt.user_id = us.user_id
+            join ufoffice.teams team
+                on team.team_id = opt.team_id
+            where
+                us.user_id = {user_id};
+        '''
+    )
+
+    return str(result[0]['team_name'])

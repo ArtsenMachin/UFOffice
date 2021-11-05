@@ -3,6 +3,9 @@ from resources.services import json_serializable
 import json
 
 
+#
+# ------- Получение задач юзеров -------
+#
 async def get_user_tasks(org_id=1):
 
     users = await DB.conn.fetch(
@@ -15,13 +18,13 @@ async def get_user_tasks(org_id=1):
                 ufoffice.users us
             join ufoffice.professions pr
                 on pr.profession_id = us.profession_id
-            join ufoffice.org_participants org
-                on org.org_id = {org_id}
-                and org.user_id = us.user_id;
+            join ufoffice.team_participants team
+                on team.team_id = {org_id}
+                and team.user_id = us.user_id;
         '''
     )
     
-    result = json_serializable(f'tasks_org_{org_id}')
+    result = json_serializable(f'tasks_team_{org_id}')
 
     for item in users:
         result.add_features('name', str(item['user_fio']))
@@ -70,3 +73,75 @@ async def get_user_tasks(org_id=1):
         result.new_features_tuple()
 
     return json.dumps(result.data[:-1], indent=2)
+
+
+#
+# ------- Обновление статуса задачи -------
+#
+async def task_status_upd(task_id):
+
+    await DB.conn.fetch(
+        f'''
+            update ufoffice.task_status
+                set task_status_name_id=2
+                where task_id = {int(task_id)};
+        '''
+    )
+
+    return 'success'
+
+#
+# ------- Создание задачи -------
+#
+async def task_crt(
+    task_name,
+    task_desc,
+    end_dt,
+    ach_pts,
+    user_id
+):
+
+    await DB.conn.fetch(
+        f'''
+            insert into ufoffice.tasks (
+                task_name,
+                task_desc,
+                end_dt,
+                ach_pts
+            )
+                values (
+                    '{task_name}',
+                    '{task_desc}',
+                    '{end_dt}'::date,
+                    {int(ach_pts)}
+                );
+        '''
+    )
+
+    await DB.conn.fetch(
+        f'''
+            insert into ufoffice.user_tasks (
+                user_id,
+                task_id
+            )
+                values (
+                    {int(user_id)},
+                    (select max(task_id) from ufoffice.tasks)
+                );
+        '''
+    )
+    
+    await DB.conn.fetch(
+        f'''
+            insert into ufoffice.task_status (
+                task_status_name_id,
+                task_id
+            )
+                values (
+                    1,
+                    (select max(task_id) from ufoffice.tasks)
+                );
+        '''
+    )
+    
+    return 'success'
