@@ -74,7 +74,7 @@
                         d="M666.62,311a1.2,1.2,0,1,0,1.2,1.2A1.16,1.16,0,0,0,666.62,311Zm-11.8,0a1.2,1.2,0,1,0,1.2,1.2A1.16,1.16,0,0,0,654.82,311Zm8.3,4.7c-1.3,0-2.4.5-2.4,1.2s1.1,1.2,2.4,1.2,2.4-.5,2.4-1.2S664.42,315.72,663.12,315.72Z" />
                 </g>
                 <g id="surface213213284"
-                v-bind:click="ShowEdu()">
+                v-on:click="ShowEdu()">
                     <path class="cls-21" d="M213.1,136.92a35.3,35.3,0,1,1,35.3-35.3A35.29,35.29,0,0,1,213.1,136.92Z" />
                     <path class="cls-22" d="M213,94.42l-5.9-10.2H189.3l23.7,40.6,23.7-40.6H218.9Z" />
                     <path class="cls-23" d="M219,84.22l-5.9,10.2-5.9-10.2h-8.6L213.1,109l14.5-24.8Z" />
@@ -132,7 +132,8 @@
             </div>
         </div>
         <AbilityModal
-        v-if="Modal"/>
+        v-if="Modal"
+        @closeModal="closeModal"/>
         <Footer/>
     </div>
 </template>
@@ -147,12 +148,15 @@ export default {
             orgname:{
                type:'menu'
             },
-            Modal:'false'
+            Modal:false
         }
     },
     methods:{
         ShowEdu(){
-            
+            this.Modal=true;
+        },
+        closeModal(){
+            this.Modal=false;
         }
     }
 }
