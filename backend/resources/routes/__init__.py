@@ -1,15 +1,28 @@
 from resources import app
 from resources.routes import (
-    login, tasks, team, create_task, organization_name, 
-    leaderboard, leaderboard_place, update_task
+    login, tasks, team, team_name, 
+    leaderboard, leaderboard_place,
+    notes
 )
+
+# ___Route list___
+#   /login
+#   /registration
+#   /tasks      methods = ['GET', 'POST', 'PATCH']
+#
+#
+#
+#
+#
+#
+
 
 
 @app.route('/')
 def main():
     return '''
         <div class="flex">
-            <h2 align="middle" class = "text">UFOffice api v0.0.1</h2>
+            <h2 align="middle" class = "text">UFOffice api v1.0.0</h2>
         </div>
         <style>
             body{
