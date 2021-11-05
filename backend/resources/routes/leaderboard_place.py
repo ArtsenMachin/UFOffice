@@ -4,7 +4,7 @@ from resources import app
 from resources.queries import get_leaderboard_place
 
 
-@app.get('/userrating')
+@app.get('/user_rating')
 async def user_rating():
     try:
         await DB.connect()

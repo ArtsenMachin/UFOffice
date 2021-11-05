@@ -61,11 +61,27 @@ create table ufoffice.professions(
 create table ufoffice.organizations(
 	org_id serial primary key,
 	--id_org_owner uniqueidentifier references dev.fct_org_owner(id_org_owner),
-	org_type_id int , --fk
+	org_type_id int,
 	org_name varchar(100),
 	legal_entity varchar(150),
 	org_desc varchar(300),
 	org_image varchar(1500)
+);
+
+-- Команды
+create table ufoffice.teams(
+	team_id serial primary key,
+	org_id int,
+	team_name varchar(100),
+	team_desc varchar(300),
+	team_image varchar(1500)
+);
+
+-- Команды организаций
+create table ufoffice.organization_teams(
+	organization_team_id serial primary key,
+	org_id int,
+	team_id int
 );
 
 -- Группы навыков
@@ -140,11 +156,18 @@ create table ufoffice.vacation_booking(
 	date_id int
 );
 
--- Члены команды (организации)
+-- Члены организации
 create table ufoffice.org_participants(
 	org_prt_id serial primary key,
 	user_id int,
 	org_id int
+);
+
+-- Члены команды
+create table ufoffice.team_participants(
+	team_prt_id serial primary key,
+	user_id int,
+	team_id int
 );
 
 -- Роли пользователей
@@ -152,4 +175,14 @@ create table ufoffice.user_roles(
 	user_role_id serial primary key,
 	user_role_name varchar(100),
 	user_role_sysname varchar(100) default 'N/D'
+);
+
+create sequence ufoffice.new_notes_seq start 1;
+
+-- Заметки
+create table ufoffice.notes(
+	note_id serial primary key,
+	note_header varchar(500) default 'new note '||nextval('ufoffice.new_notes_seq'),
+	note_body varchar(15000),
+	user_id int
 );
