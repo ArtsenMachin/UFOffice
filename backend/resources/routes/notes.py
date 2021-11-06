@@ -16,8 +16,10 @@ async def notes():
         await DB.connect()
 
         if request.method == 'GET':
+            
             user_id = request.args['user_id']
-            output = await user_notes(user_id)
+            quantity = request.args['quantity']
+            output = await user_notes(user_id, quantity)
 
             await DB.close()
 
