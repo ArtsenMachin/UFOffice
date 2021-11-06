@@ -11,7 +11,7 @@ async def login_user():
         await DB.connect()
 
         data = request.data.decode('utf8')
-        output = await check_user_login(loads(data)['login'], loads(data)['password'])
+        output = await check_user_login(loads(data)['username'], loads(data)['password'])
 
         await DB.close()
 

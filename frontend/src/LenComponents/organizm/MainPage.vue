@@ -45,7 +45,7 @@ id="home">
                     </div>
                 </v-card-text>
             <v-card-actions>
-                <router-link to='/signin'>
+                <router-link to='/office'>
                     <v-btn
                     color="teal"
                     class="mx-2"

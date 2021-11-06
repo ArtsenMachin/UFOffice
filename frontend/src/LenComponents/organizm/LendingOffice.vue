@@ -25,21 +25,26 @@
 </template>
 
 <script>
+/* eslint-disable import/no-unresolved */
+/* eslint-disable global-require */
 export default {
   name: 'LendingOffice',
   data: () => ({
     items: [
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+        src: require('@/assets/img/Screen1.png'),
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+        src: require('@/assets/img/Screen2.png'),
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+        src: require('@/assets/img/Screen3.png'),
       },
       {
-        src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+        src: require('@/assets/img/Screen4.png'),
+      },
+      {
+        src: require('@/assets/img/Screen5.png'),
       },
     ],
   }),

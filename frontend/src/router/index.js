@@ -35,11 +35,19 @@ const router = new Router({
         },
         {
           path: '/leaderboard',
-          component: () => import('../OfficeComponents/Organizm/LiderBoard.vue'),
+          component: () => import('../OfficeComponents/Organizm/LeaderBoard.vue'),
         },
         {
           path: '/ability',
           component: () => import('../OfficeComponents/Organizm/AbilityPage.vue'),
+        },
+        {
+          path: '/ability/:id',
+          component: () => import('../OfficeComponents/Organizm/AbilityLearn.vue'),
+        },
+        {
+          path: '/notes',
+          component: () => import('../OfficeComponents/Organizm/NotesPage.vue'),
         },
         {
           path: '*',
@@ -55,13 +63,13 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/' && !localStorage.getItem('token')) {
+  if (to.path !== '/' && !localStorage.getItem('login')) {
     next({ name: 'Lending' });
   } else next();
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.fullPath === from.fullPath) {
+  if (to.fullPath === from.fullPath && to.fullPath !== '/') {
     next(false);
   } else next();
 });

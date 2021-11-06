@@ -20,6 +20,16 @@
       v-else-if="isAction('openTask')"
       :task="dialogState.elProps"
     />
+    <add-notes
+    v-else-if="isAction('addNotes')"/>
+    <del-notes
+    v-else-if="isAction('delNotes')"
+    :notes="dialogState.elProps"
+    />
+    <red-notes
+    v-else-if="isAction('redNotes')"
+    :notes="dialogState.elProps"
+    />
   </v-dialog>
 </template>
 
@@ -27,8 +37,11 @@
 import { mapGetters, mapActions } from 'vuex';
 import LogIn from '../LenComponents/molecules/LogIn.vue';
 import SingIn from '../LenComponents/molecules/SingIn.vue';
+import AddNotes from '../OfficeComponents/molecules/AddNotes.vue';
 import AddTask from '../OfficeComponents/molecules/AddTask.vue';
+import DelNotes from '../OfficeComponents/molecules/DelNotes.vue';
 import FullTaskCard from '../OfficeComponents/molecules/FullTaskCard.vue';
+import RedNotes from '../OfficeComponents/molecules/RedNotes.vue';
 
 export default {
   name: 'WindowDialog',
@@ -37,7 +50,9 @@ export default {
     SingIn,
     AddTask,
     FullTaskCard,
-
+    AddNotes,
+    DelNotes,
+    RedNotes,
   },
   computed: {
     ...mapGetters('dialog', ['dialogState']),

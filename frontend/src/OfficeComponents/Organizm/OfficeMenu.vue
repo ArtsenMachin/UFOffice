@@ -27,7 +27,7 @@
             sm='4'
             lg='4'
             >
-                <v-row>
+                <v-row v-if="JSON.stringify(notesState)!==JSON.stringify([])">
                     <v-col
                     cols='6'
                     v-for="(item, key) in notesState"
@@ -47,28 +47,44 @@
                     </router-link>
                     </v-col>
                 </v-row>
+                <v-row
+                v-else
+                class='mt-15'>
+                  <v-col
+                    cols='6'
+                    class='mx-auto mt-15'>
+                        <notes-card
+                        :notes="notesDefault"/>
+                    </v-col>
+                  <v-col
+                  cols='12'
+                  class="text-center">
+                    <router-link to="/notes">
+                      <v-btn
+                      dark
+                      color="blue">
+                          Мои заметки
+                      </v-btn>
+                    </router-link>
+                  </v-col>
+                </v-row>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 import NavCard from '../molecules/NavCard.vue';
 import NotesCard from '../molecules/NotesCard.vue';
 
 export default {
   components: { NavCard, NotesCard },
   name: 'OfficeMenu',
-  componets: {
-
+  computed: {
+    ...mapGetters('notes', ['notesState']),
   },
   data: () => ({
-    notesState: [
-      { header: 'Note1', text: 'texttexttext' },
-      { header: 'Note2', text: 'texttexttext' },
-      { header: 'Note3', text: 'texttexttext' },
-      { header: 'Note4', text: 'texttexttext' },
-    ],
     menuCfg: [
       {
         name: 'Профиль', icon: 'mdi-account-outline', link: '/profile', color: 'red',
@@ -77,16 +93,16 @@ export default {
         name: 'Чат', icon: 'mdi-chat-outline', link: '/chat', color: 'blue',
       },
       {
-        name: 'Команда', icon: 'mdi-human-male-board-poll', link: '/team', color: 'teal',
+        name: 'Команда', icon: 'mdi-human-male-board-poll', link: '/team', color: 'deep-purple darken-2',
       },
       {
         name: 'Задачи', icon: 'mdi-sign-text', link: '/task', color: 'yellow accent-4',
       },
       {
-        name: 'Лидеры', icon: 'mdi-podium', link: '/leaderboard', color: 'deep-purple darken-2',
+        name: 'Лидеры', icon: 'mdi-podium', link: '/leaderboard', color: 'teal',
       },
       {
-        name: 'Игра', icon: 'mdi-gamepad-round-left', link: '/gameoffice', color: 'pink darken-2',
+        name: 'Игровой офис', icon: 'mdi-gamepad-round-left', link: '/gameoffice', color: 'pink darken-2',
       },
       {
         name: 'Справка', icon: 'mdi-help-circle-outline', link: '/faq', color: 'cyan',
@@ -101,7 +117,17 @@ export default {
         name: 'Магазин', icon: 'mdi-cart-outline', link: '/shop', color: 'orange darken-1',
       },
     ],
+    notesDefault: {
+      header: 'Хэй, не сильно отвлекаю?', body: `Я твоя заметка, я всегда буду тут и напомню тебе о самом важном, только не забывай обновлять меня, ладно?
+    Одновременно на твоём экране могут помещаться 4 заметки, остальные найдешь по кнопочке снизу)`,
+    },
   }),
+  mounted() {
+    this.getNotes('4');
+  },
+  methods: {
+    ...mapActions('notes', ['getNotes']),
+  },
 };
 </script>
 

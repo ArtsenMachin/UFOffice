@@ -56,12 +56,12 @@ export default {
     border-radius: 5px !important;
 }
 .active{
-    background-color: #6E44FF !important;
+    background-color: #3F51B5 !important;
 }
 .inactive{
-    background-color: #20E9C4 !important;
+    background-color: #009688 !important;
 }
 .stillactive{
-    background-color: #EE562F !important;
+    background-color: #F44336 !important;
 }
 </style>

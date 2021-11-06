@@ -26,6 +26,7 @@ async def check_user_login(login, password):
                 result.add_features('token', str(item['user_id']))
                 result.add_features('role', str(item['user_role_sysname']))
                 
+
                 return result.data[0]	
         
         return 'wrong'

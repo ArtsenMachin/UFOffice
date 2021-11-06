@@ -1,3 +1,5 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
 
 export function sendRequest(method, url, data = null) {
@@ -6,7 +8,11 @@ export function sendRequest(method, url, data = null) {
     url,
     resposeType: 'json',
   };
-  req.data = data;
+  if (req.method === 'get') {
+    req.params = data;
+  } else {
+    req.data = data;
+  }
 
   return axios(req);
 }

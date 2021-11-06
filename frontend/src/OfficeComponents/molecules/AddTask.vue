@@ -27,17 +27,17 @@
                 type="number"
             >
             </v-text-field>
-            <v-text-field
-                v-model="taskInfo.password"
-                label="Пароль"
-                hide-details="auto"
-                type="password"
-            >
-            </v-text-field>
+            <div>
+              <v-date-picker
+                v-model="taskInfo.data"
+                color="green lighten-1"
+                class='mx-auto mt-4'
+              ></v-date-picker>
+            </div>
             <v-btn
             color="indigo"
             dark
-            class='mt-8'
+            class='mt-4'
             @click="add"
             >
             Создать
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-// import { mapActions } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'AddTask',
@@ -61,11 +61,19 @@ export default {
     taskInfo: {
       name: '',
       rating: '',
-      data: '',
+      data: (new Date(Date.now() - (new Date()).getTimezoneOffset()
+      * 60000)).toISOString().substr(0, 10),
       desc: '',
       id: '',
     },
   }),
+  methods: {
+    ...mapActions('task', ['newTask']),
+    add() {
+      this.taskInfo.id = this.worker;
+      this.newTask(this.taskInfo);
+    },
+  },
 
 };
 </script>

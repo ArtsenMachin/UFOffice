@@ -1,11 +1,13 @@
 from resources import DB
 from resources.services import json_serializable
-
+import json
 
 #
 # Получение заметок пользователя
 #
-async def user_notes(user_id):
+async def user_notes(user_id, quantity):
+
+    quantity = 'all' if quantity == 100000 else quantity
 
     values = await DB.conn.fetch(
         f'''
@@ -16,7 +18,9 @@ async def user_notes(user_id):
             from
                 ufoffice.notes nt
             where
-                nt.user_id = {user_id};
+                nt.user_id = {user_id}
+            limit {quantity};
+
         '''
     )
     
@@ -29,7 +33,7 @@ async def user_notes(user_id):
         result.add_features('body', str(item['note_body']))
         result.new_features_tuple()
 
-    return str(result.data[:-1])
+    return json.dumps(result.data[:-1], indent=2)
 
 
 #

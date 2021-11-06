@@ -4,6 +4,7 @@ from resources.routes import (
     leaderboard, leaderboard_place,
     notes
 )
+from flask import request
 
 # ___Route list___
 #   /login
@@ -15,6 +16,19 @@ from resources.routes import (
 #
 #
 #
+
+# @app.after_request
+# def add_cors_headers(response):
+#     try:
+#         if '26.237.70.37' in request.referrer:
+#             response.headers.add('Access-Control-Allow-Origin', '*')
+#             response.headers.add('Access-Control-Allow-Credentials', 'true')
+#             response.headers.add('Access-Control-Allow-Headers', '*, *')
+
+#     except Exception as e:
+#         print(e)
+
+#     return response
 
 
 

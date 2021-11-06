@@ -26,12 +26,16 @@ export default {
   methods: {
     ...mapActions('dialog', ['openDialog']),
     userAct(el) {
-      const dialog = {
-        action: el,
-        elProps: '',
-        value: true,
-      };
-      this.openDialog(dialog);
+      if (localStorage.getItem('token')) {
+        this.$router.push({ path: '/office' });
+      } else {
+        const dialog = {
+          action: el,
+          elProps: '',
+          value: true,
+        };
+        this.openDialog(dialog);
+      }
     },
   },
 };
