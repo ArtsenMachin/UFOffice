@@ -8,8 +8,9 @@ from resources.queries import check_user_login
 @app.post('/login')
 async def login_user():
     try:
-        await DB.connect()
 
+        await DB.connect()
+        
         data = request.data.decode('utf8')
         output = await check_user_login(loads(data)['username'], loads(data)['password'])
 
